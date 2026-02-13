@@ -1,0 +1,83 @@
+﻿import FadeIn from "@/components/FadeIn";
+
+type FAQItem = {
+  question: string;
+  answer: string;
+};
+
+const faqItems: FAQItem[] = [
+  {
+    question: "初めてでも大丈夫ですか？運動経験がほとんどありません。",
+    answer:
+      "はい、もちろん大丈夫です。VERDE FITでは、お客様の体力レベルや年齢の状態に合わせた無理のないプログラムを作成しますので、安心してお越しください。",
+  },
+  {
+    question: "どのくらいの頻度で通えばいいですか？",
+    answer:
+      "お悩みの内容や目標によって異なりますが、初期は週1〜2回、改善が見られてからは月2回程度のメンテナンスをおすすめしています。無理なく続けられるペースで、長期的な健康づくりをサポートします。",
+  },
+  {
+    question: "整体とパーソナルトレーニング、どちらを選べばいいですか？",
+    answer:
+      "初回のカウンセリングで、あなたの身体の状態や目標をお聞きし、最適なプランをご提案します。慢性的な痛みがある方は整体から、体力づくりや姿勢改善が目的の方はパーソナルトレーニングがおすすめです。両方を組み合わせることも可能です。",
+  },
+  {
+    question: "予約は取りやすいですか？",
+    answer:
+      "完全予約制で、一人ひとりのお時間をしっかり確保しています。OPEN直後は比較的ご予約が取りやすい状況です。お早めのご予約をおすすめします。お急ぎの場合も、お電話でご相談ください。",
+  },
+  {
+    question: "支払い方法は何がありますか？",
+    answer:
+      "現金、クレジットカード、電子マネーに対応しています。回数券をご購入いただくと、1回あたりの料金がお得になります。詳しくは初回カウンセリング時にご説明します。",
+  },
+  {
+    question: "駐車場はありますか？",
+    answer:
+      "はい、専用駐車場を完備しています。お車でお越しの際も安心してご利用いただけます。駐車場の場所は、ご予約時にご案内いたします。",
+  },
+  {
+    question: "持ち物は何が必要ですか？",
+    answer:
+      "整体の場合は特に必要ありません。パーソナルトレーニングの場合は、動きやすい服装とタオル、飲み物をお持ちください。ウェアのレンタルもご用意していますので、手ぶらでもご来店いただくことも可能です。",
+  },
+];
+
+export default function FAQ() {
+  return (
+    <section id="faq" className="bg-[#f3f4f3] py-20 md:py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <FadeIn>
+          <div className="mb-12 text-center md:mb-14">
+            <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[52px]">よくあるご質問</h2>
+            <p className="mx-auto mt-4 max-w-3xl text-sm font-medium text-gray-500 md:text-xl">
+              ご予約前の不安や疑問を解消します
+            </p>
+          </div>
+        </FadeIn>
+
+        <div className="space-y-4 md:space-y-5">
+          {faqItems.map((item, i) => (
+            <FadeIn key={item.question} delay={i * 60}>
+              <article className="rounded-xl border border-gray-200 bg-white px-5 py-4 md:px-6 md:py-5">
+                <div className="flex items-start gap-3">
+                  <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-green-700 font-sans text-sm font-bold text-white">
+                    Q
+                  </span>
+                  <p className="pt-1 text-sm font-bold leading-7 text-[#1f2937] md:text-[15px] md:leading-8">{item.question}</p>
+                </div>
+
+                <div className="mt-2 flex items-start gap-3">
+                  <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[#bf8f2f] font-sans text-sm font-bold text-white">
+                    A
+                  </span>
+                  <p className="pt-1 text-sm leading-7 text-gray-700 md:text-[14px] md:leading-8">{item.answer}</p>
+                </div>
+              </article>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
