@@ -1,4 +1,5 @@
 import { safeFetch } from "@/sanity/client";
+import { urlForImage } from "@/sanity/image";
 import Hero from "@/components/sections/Hero";
 import Services from "@/components/sections/Services";
 import Concerns from "@/components/sections/Concerns";
@@ -148,17 +149,11 @@ type TestimonialsRaw = Omit<TestimonialsSanity, "voiceList"> & { voiceList?: Voi
 
 function imgUrl(ref: SanityImageRef | undefined): string | undefined {
   if (!ref?.asset?._ref) return undefined;
-  // Extract URL from Sanity asset reference using CDN pattern
-  // Format: image-{id}-{width}x{height}-{format}
-  const ref_str = ref.asset._ref;
-  const parts = ref_str.replace("image-", "").split("-");
-  const format = parts.pop();
-  const dims = parts.pop();
-  const id = parts.join("-");
-  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
-  if (!projectId) return undefined;
-  return `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dims}.${format}`;
+  try {
+    return urlForImage(ref);
+  } catch {
+    return undefined;
+  }
 }
 
 export default async function Home() {

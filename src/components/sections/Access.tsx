@@ -146,12 +146,11 @@ export default function Access({ data }: { data?: AccessData | null }) {
           </FadeIn>
 
           <FadeIn delay={150}>
-            <div className="overflow-hidden rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.08)] h-[280px] sm:h-[380px] md:h-[520px]">
+            <div className="overflow-hidden rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
               <iframe
                 src={mapEmbedUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0, display: "block" }}
+                className="block w-full"
+                style={{ border: 0, height: "clamp(280px, 50vw, 520px)" }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

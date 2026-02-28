@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" className="overflow-x-hidden">
       <body
         className={`${notoSansJP.variable} ${notoSerifJP.variable} antialiased overflow-x-hidden`}
       >

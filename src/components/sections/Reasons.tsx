@@ -118,7 +118,7 @@ export default function Reasons({ data }: { data?: ReasonsData | null }) {
                     <ReasonVisual imageUrl={imgSrc} imageAlt={imgAlt} align="start" />
                   )}
 
-                  <div className={`${reverse ? "md:order-1" : ""} pt-1`}>
+                  <div className={`${reverse ? "order-last md:order-1" : ""} pt-1`}>
                     <div className="mb-3 flex items-center gap-3">
                       <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-green-700 text-[12px] font-bold text-white">
                         {reason.number ?? String(i + 1).padStart(2, "0")}
@@ -133,7 +133,7 @@ export default function Reasons({ data }: { data?: ReasonsData | null }) {
                   </div>
 
                   {reverse && (
-                    <div className="md:order-2">
+                    <div className="order-first md:order-2">
                       <ReasonVisual imageUrl={imgSrc} imageAlt={imgAlt} align="end" />
                     </div>
                   )}
