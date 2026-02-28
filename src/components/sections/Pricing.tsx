@@ -12,6 +12,12 @@ type PricingColumn = {
   items?: PricingItem[] | null;
 };
 
+type CancelPolicySection = {
+  _key?: string;
+  title?: string | null;
+  content?: string | null;
+};
+
 type PricingData = {
   sectionTitle?: string | null;
   sectionDescription?: string | null;
@@ -23,6 +29,9 @@ type PricingData = {
   trialBenefits?: string[] | null;
   pricingColumns?: PricingColumn[] | null;
   pricingNote?: string | null;
+  cancelPolicyIntro?: string | null;
+  cancelPolicySections?: CancelPolicySection[] | null;
+  cancelPolicyClosing?: string | null;
 };
 
 const defaultTrialBenefits = [
@@ -82,6 +91,44 @@ export default function Pricing({ data }: { data?: PricingData | null }) {
       : defaultPricingColumns;
   const pricingNote =
     data?.pricingNote ?? "※すべて税込価格です。回数券プランもございます。";
+
+  const defaultCancelPolicySections: CancelPolicySection[] = [
+    {
+      _key: "cp1",
+      title: "■ キャンセル・変更について",
+      content:
+        "ご予約の変更・キャンセルは、できるだけお早めにご連絡ください。\n・2日前までのご連絡：無料で変更可能\n・前日のキャンセル：ご利用料金の50%\n・当日キャンセル：ご利用料金の100%\n※前日までにご連絡をいただいた場合、1回のみ振替対応が可能です。\n※振替は同月内でのご利用をお願いしております。",
+    },
+    {
+      _key: "cp2",
+      title: "■ 無断キャンセルについて",
+      content:
+        "ご連絡のないキャンセルは「1回分消化」とさせていただきます。\nまた、無断キャンセルや直前のキャンセル・変更が続く場合は、今後のご予約方法やご契約内容の見直しをお願いする場合がございます。",
+    },
+    {
+      _key: "cp3",
+      title: "■ 遅刻について",
+      content:
+        "ご予約時間に遅れてご来店された場合、次のお客様の関係上、セッション時間を短縮させていただくことがございます。\nなお、ご連絡なく10分以上遅れた場合はキャンセル扱いとなる場合がございます。",
+    },
+    {
+      _key: "cp4",
+      title: "■ 体調不良・やむを得ない事情の場合",
+      content:
+        "体調不良や急なご事情の際は、無理をなさらずお早めにご連絡ください。\n医師の診断書の提出など客観的にやむを得ない理由が確認できる場合は、個別に対応させていただきます。",
+    },
+  ];
+
+  const cancelPolicyIntro =
+    data?.cancelPolicyIntro ??
+    "VERDE FITでは、お一人おひとりに十分なお時間を確保した完全予約制でご案内しております。\nすべてのお客様に気持ちよくご利用いただくため、下記のルールにご理解とご協力をお願いいたします。";
+  const cancelPolicySections =
+    data?.cancelPolicySections && data.cancelPolicySections.length > 0
+      ? data.cancelPolicySections
+      : defaultCancelPolicySections;
+  const cancelPolicyClosing =
+    data?.cancelPolicyClosing ??
+    "皆さまが安心して通っていただける環境づくりのため、何卒ご理解のほどよろしくお願いいたします。";
 
   return (
     <section id="pricing" className="bg-white py-20 md:py-24">
@@ -205,55 +252,25 @@ export default function Pricing({ data }: { data?: PricingData | null }) {
                   </svg>
                   大切なお知らせ
                 </p>
-                <p className="mt-3 text-[13px] leading-7 text-gray-600">
-                  VERDE FITでは、お一人おひとりに十分なお時間を確保した完全予約制でご案内しております。<br />
-                  すべてのお客様に気持ちよくご利用いただくため、下記のルールにご理解とご協力をお願いいたします。
+                <p className="mt-3 whitespace-pre-line text-[13px] leading-7 text-gray-600">
+                  {cancelPolicyIntro}
                 </p>
               </div>
 
               <div className="space-y-6">
-                <div>
-                  <p className="mb-2 text-center font-bold text-[#1f2937]">■ キャンセル・変更について</p>
-                  <p className="text-center text-[13px] leading-6 text-gray-600">ご予約の変更・キャンセルは、できるだけお早めにご連絡ください。</p>
-                  <ul className="mt-3 space-y-1.5 text-center text-[13px] leading-6">
-                    <li>・2日前までのご連絡：<span className="font-semibold">無料で変更可能</span></li>
-                    <li>・前日のキャンセル：<span className="font-semibold">ご利用料金の50%</span></li>
-                    <li>・当日キャンセル：<span className="font-semibold">ご利用料金の100%</span></li>
-                  </ul>
-                  <div className="mt-3 space-y-1 text-center text-[12px] text-gray-500">
-                    <p>※前日までにご連絡をいただいた場合、1回のみ振替対応が可能です。</p>
-                    <p>※振替は同月内でのご利用をお願いしております。</p>
+                {cancelPolicySections.map((section, i) => (
+                  <div key={section._key ?? i}>
+                    <p className="mb-2 text-center font-bold text-[#1f2937]">{section.title}</p>
+                    <p className="whitespace-pre-line text-center text-[13px] leading-7 text-gray-600">
+                      {section.content}
+                    </p>
                   </div>
-                </div>
-
-                <div>
-                  <p className="mb-2 text-center font-bold text-[#1f2937]">■ 無断キャンセルについて</p>
-                  <p className="text-center text-[13px] leading-7 text-gray-600">
-                    ご連絡のないキャンセルは「1回分消化」とさせていただきます。<br />
-                    また、無断キャンセルや直前のキャンセル・変更が続く場合は、今後のご予約方法やご契約内容の見直しをお願いする場合がございます。
-                  </p>
-                </div>
-
-                <div>
-                  <p className="mb-2 text-center font-bold text-[#1f2937]">■ 遅刻について</p>
-                  <p className="text-center text-[13px] leading-7 text-gray-600">
-                    ご予約時間に遅れてご来店された場合、次のお客様の関係上、セッション時間を短縮させていただくことがございます。<br />
-                    なお、ご連絡なく10分以上遅れた場合はキャンセル扱いとなる場合がございます。
-                  </p>
-                </div>
-
-                <div>
-                  <p className="mb-2 text-center font-bold text-[#1f2937]">■ 体調不良・やむを得ない事情の場合</p>
-                  <p className="text-center text-[13px] leading-7 text-gray-600">
-                    体調不良や急なご事情の際は、無理をなさらずお早めにご連絡ください。<br />
-                    医師の診断書の提出など客観的にやむを得ない理由が確認できる場合は、個別に対応させていただきます。
-                  </p>
-                </div>
+                ))}
               </div>
 
               <div className="mt-8 text-center">
-                <p className="text-[13px] font-medium text-gray-600">
-                  皆さまが安心して通っていただける環境づくりのため、何卒ご理解のほどよろしくお願いいたします。
+                <p className="whitespace-pre-line text-[13px] font-medium text-gray-600">
+                  {cancelPolicyClosing}
                 </p>
                 <p className="mt-3 text-[13px] font-bold text-green-700">VERDE FIT</p>
               </div>

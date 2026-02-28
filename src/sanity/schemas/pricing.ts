@@ -101,6 +101,40 @@ export const pricingSchema = defineType({
       type: "string",
       description: "例: ※すべて税込価格です。回数券プランもございます。",
     }),
+    // Cancellation policy
+    defineField({
+      name: "cancelPolicyIntro",
+      title: "キャンセルポリシー 前書き",
+      type: "text",
+      rows: 3,
+    }),
+    defineField({
+      name: "cancelPolicySections",
+      title: "キャンセルポリシー セクション",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "title", title: "タイトル", type: "string" }),
+            defineField({
+              name: "content",
+              title: "内容",
+              type: "text",
+              rows: 5,
+              description: "改行はそのまま反映されます。",
+            }),
+          ],
+          preview: { select: { title: "title" } },
+        },
+      ],
+    }),
+    defineField({
+      name: "cancelPolicyClosing",
+      title: "キャンセルポリシー 締めの言葉",
+      type: "text",
+      rows: 2,
+    }),
   ],
   preview: {
     prepare: () => ({ title: "料金" }),

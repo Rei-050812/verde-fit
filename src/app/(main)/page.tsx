@@ -89,6 +89,7 @@ type ProfileSanity = {
 
 type PricingItem = { _key: string; label?: string; price?: string };
 type PricingColumn = { _key: string; title?: string; items?: PricingItem[] };
+type CancelPolicySection = { _key: string; title?: string; content?: string };
 type PricingSanity = {
   sectionTitle?: string;
   sectionDescription?: string;
@@ -100,6 +101,9 @@ type PricingSanity = {
   trialBenefits?: string[];
   pricingColumns?: PricingColumn[];
   pricingNote?: string;
+  cancelPolicyIntro?: string;
+  cancelPolicySections?: CancelPolicySection[];
+  cancelPolicyClosing?: string;
 };
 
 type FAQItem = { _key: string; question?: string; answer?: string };
