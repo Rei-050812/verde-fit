@@ -26,7 +26,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
 
   return (
     <section className="relative overflow-hidden bg-[#e8f3ec]">
-      <div className="mx-auto max-w-7xl px-4 pt-24 pb-12 sm:px-6 sm:pt-28 sm:pb-16 lg:px-10 lg:py-24">
+      <div className="mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-28 sm:pb-16 lg:px-10 lg:py-24">
         <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
           <div className="min-w-0 order-2 lg:order-1">
             <FadeIn>
@@ -75,7 +75,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
 
           <FadeIn delay={250} className="order-1 lg:order-2">
             <div
-              className="relative -mx-4 w-[calc(100%+2rem)] sm:-mx-6 sm:w-[calc(100%+3rem)] lg:mx-0 lg:w-full overflow-hidden aspect-[16/9] lg:aspect-square lg:rounded-full"
+              className="relative -mx-4 w-[calc(100%+2rem)] sm:-mx-6 sm:w-[calc(100%+3rem)] lg:mx-0 lg:w-full overflow-hidden aspect-[4/3] lg:aspect-square lg:rounded-full"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img

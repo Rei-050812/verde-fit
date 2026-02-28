@@ -5,7 +5,7 @@ export const client = createClient({
   projectId: projectId || "placeholder",
   dataset,
   apiVersion,
-  useCdn: process.env.NODE_ENV === "production",
+  useCdn: false,
   token: process.env.SANITY_API_TOKEN,
 });
 
