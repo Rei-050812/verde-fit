@@ -59,8 +59,8 @@ export default function Footer({
   footerDescription,
   copyrightYear,
 }: FooterProps) {
-  const telHref = phone ? `tel:${phone.replace(/-/g, "")}` : "tel:0000000000";
-  const telDisplay = phone ?? "0000000000";
+  const telHref = phone ? `tel:${phone.replace(/-/g, "")}` : "#";
+  const telDisplay = "お電話でのご相談";
   const year = copyrightYear ?? "2026";
   const description =
     footerDescription ??
