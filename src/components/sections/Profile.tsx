@@ -5,7 +5,7 @@ const credentials = [
   "NSCA-CPT（認定パーソナルトレーナー）",
   "認定ボディメイクコーチ資格",
   "整体・トレーニング指導歴 10年",
-  "延べ施術人数 3,000人以上",
+  "延べ施術人数 5,000人以上",
 ];
 
 export default function Profile() {

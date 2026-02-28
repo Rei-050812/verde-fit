@@ -4,6 +4,7 @@ type Voice = {
   goal: string;
   demographics: string;
   result: string;
+  image: string;
 };
 
 const voices: Voice[] = [
@@ -11,50 +12,40 @@ const voices: Voice[] = [
     goal: "健康維持増進とボディメイク目的",
     demographics: "30代女性",
     result: "4ヶ月のトレーニングでウエストと\n下半身が引き締まり、\n姿勢と日ごろの効果を実感",
+    image: "/testimonial-01.png",
   },
   {
     goal: "ダイエット目的",
     demographics: "30代女性",
     result: "6ヶ月で10kg減量\nトレーニングも無理なく継続中",
+    image: "/testimonial-02.png",
   },
   {
     goal: "ダイエット目的",
     demographics: "60代女性",
     result: "3ヶ月で10kg減量\n週3回のトレーニングと食事管理で継続中",
+    image: "/testimonial-03.png",
   },
   {
     goal: "ボディメイク目的",
     demographics: "50代女性",
     result: "フォーム修正で効果が向上し\n見た目にも変化を実感",
+    image: "/testimonial-04.png",
   },
   {
     goal: "右肩を上げると肩が痛む",
     demographics: "60代女性",
     result: "原因にアプローチし\n短時間で効果を実感",
+    image: "/testimonial-05.png",
   },
   {
     goal: "O脚で膝が痛い",
     demographics: "40代女性",
     result: "長年痛めていた痛み\n1回でここまで改善",
+    image: "/testimonial-06.png",
   },
 ];
 
-function PersonIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      className="h-16 w-16 text-green-600"
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="8" r="3.5" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7" />
-    </svg>
-  );
-}
 
 export default function Testimonials() {
   return (
@@ -84,8 +75,13 @@ export default function Testimonials() {
                   <p className="mb-1 text-[11px] text-gray-400">※写真はイメージです</p>
                   <p className="mb-4 text-[12px] text-gray-500">定期的な利用者で生まれる実感</p>
 
-                  <div className="flex h-36 w-36 items-center justify-center rounded-full bg-gray-200">
-                    <PersonIcon />
+                  <div className="h-36 w-36 overflow-hidden rounded-full">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={v.image}
+                      alt={v.demographics}
+                      className="h-full w-full object-cover object-top"
+                    />
                   </div>
                 </div>
 
