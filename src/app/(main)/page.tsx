@@ -169,12 +169,22 @@ export default async function Home() {
     accessData,
     ctaData,
   ] = await Promise.all([
-    safeFetch<HeroRaw>(`*[_type == "hero"][0]`),
-    safeFetch<ServicesRaw>(`*[_type == "services"][0]`),
+    safeFetch<HeroRaw>(
+      `*[_type == "hero"][0]{ ..., image{ asset{ _ref, _type } } }`
+    ),
+    safeFetch<ServicesRaw>(
+      `*[_type == "services"][0]{ ..., serviceList[]{ ..., image{ asset{ _ref, _type } } } }`
+    ),
     safeFetch<ConcernsSanity>(`*[_type == "concerns"][0]`),
-    safeFetch<ReasonsRaw>(`*[_type == "reasons"][0]`),
-    safeFetch<TestimonialsRaw>(`*[_type == "testimonials"][0]`),
-    safeFetch<ProfileRaw>(`*[_type == "profile"][0]`),
+    safeFetch<ReasonsRaw>(
+      `*[_type == "reasons"][0]{ ..., reasonList[]{ ..., image{ asset{ _ref, _type } } } }`
+    ),
+    safeFetch<TestimonialsRaw>(
+      `*[_type == "testimonials"][0]{ ..., voiceList[]{ ..., image{ asset{ _ref, _type } } } }`
+    ),
+    safeFetch<ProfileRaw>(
+      `*[_type == "profile"][0]{ ..., image{ asset{ _ref, _type } } }`
+    ),
     safeFetch<PricingSanity>(`*[_type == "pricing"][0]`),
     safeFetch<FAQSanity>(`*[_type == "faqSection"][0]`),
     safeFetch<AccessSanity>(`*[_type == "access"][0]`),
