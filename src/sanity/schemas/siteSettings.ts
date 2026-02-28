@@ -27,6 +27,13 @@ export const siteSettingsSchema = defineType({
       type: "string",
       description: "例: 2026",
     }),
+    defineField({
+      name: "favicon",
+      title: "ファビコン",
+      type: "image",
+      description: "ブラウザのタブに表示されるアイコン（推奨: 32×32 または 64×64px の正方形）",
+      options: { hotspot: false },
+    }),
   ],
   preview: {
     prepare: () => ({ title: "サイト設定" }),

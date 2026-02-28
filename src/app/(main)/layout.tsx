@@ -12,6 +12,7 @@ type SiteSettingsSanity = {
   lineUrl?: string;
   footerDescription?: string;
   copyrightYear?: string;
+  favicon?: { asset: { _ref: string; _type: string } };
 };
 
 type TopPageSeoSanity = {
@@ -38,11 +39,19 @@ const defaultMetadata: Metadata = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await safeFetch<TopPageSeoSanity>(
-    `*[_type == "topPageSeo"][0]{ pageTitle, metaDescription, keywords, ogTitle, ogDescription, ogImage }`
-  );
+  const [seo, settings] = await Promise.all([
+    safeFetch<TopPageSeoSanity>(
+      `*[_type == "topPageSeo"][0]{ pageTitle, metaDescription, keywords, ogTitle, ogDescription, ogImage }`
+    ),
+    safeFetch<Pick<SiteSettingsSanity, "favicon">>(
+      `*[_type == "siteSettings"][0]{ favicon{ asset{ _ref, _type } } }`
+    ),
+  ]);
 
-  if (!seo) return defaultMetadata;
+  const faviconUrl = settings?.favicon ? urlForImage(settings.favicon) : undefined;
+  const icons = faviconUrl ? { icon: faviconUrl } : undefined;
+
+  if (!seo) return { ...defaultMetadata, ...(icons ? { icons } : {}) };
 
   const ogImageUrl = seo.ogImage ? urlForImage(seo.ogImage) : undefined;
 
@@ -54,6 +63,7 @@ export async function generateMetadata(): Promise<Metadata> {
       seo.metaDescription ??
       "2026年春、横手市にグランドオープン。整体×パーソナルトレーニング×コーチングで、カラダとココロを根本から整えるトータルケアサロンVERDE FIT。",
     keywords: seo.keywords ?? ["横手市", "整体", "パーソナルトレーニング", "コーチング"],
+    icons,
     openGraph: {
       title:
         seo.ogTitle ??
@@ -76,7 +86,7 @@ export default async function MainLayout({
   children: React.ReactNode;
 }) {
   const settings = await safeFetch<SiteSettingsSanity>(
-    `*[_type == "siteSettings"][0]{ phone, instagramUrl, facebookUrl, lineUrl, footerDescription, copyrightYear }`
+    `*[_type == "siteSettings"][0]{ phone, instagramUrl, facebookUrl, lineUrl, footerDescription, copyrightYear, favicon{ asset{ _ref, _type } } }`
   );
 
   const phone = settings?.phone ?? undefined;

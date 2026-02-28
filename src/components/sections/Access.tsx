@@ -13,6 +13,7 @@ type AccessData = {
   closedDaysNote?: string | null;
   parking?: string | null;
   payment?: string | null;
+  mapEmbedUrl?: string | null;
 };
 
 export default function Access({ data }: { data?: AccessData | null }) {
@@ -30,6 +31,9 @@ export default function Access({ data }: { data?: AccessData | null }) {
   const closedDaysNote = data?.closedDaysNote ?? "※SNS等で事前にお知らせ";
   const parking = data?.parking ?? "専用駐車場あり（無料）";
   const payment = data?.payment ?? "現金 / クレジットカード / 電子マネー";
+  const mapEmbedUrl =
+    data?.mapEmbedUrl ??
+    `https://maps.google.com/maps?q=${encodeURIComponent(address)}&output=embed&hl=ja`;
 
   return (
     <section id="access" className="bg-[#e8f3ec] py-20 md:py-24">
@@ -142,23 +146,17 @@ export default function Access({ data }: { data?: AccessData | null }) {
           </FadeIn>
 
           <FadeIn delay={150}>
-            <div className="flex min-h-[460px] items-center justify-center rounded-2xl bg-gradient-to-r from-[#efebe2] to-[#e7efe7] p-6 shadow-[0_8px_24px_rgba(0,0,0,0.04)] md:min-h-[520px]">
-              <div className="text-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  className="mx-auto h-20 w-20 text-green-400"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.5 7.5L8 5.5l4 2 4-2 4.5 2v11L16 20.5l-4-2-4 2-4.5-2v-11z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 5.5v13M16 5.5v13" />
-                </svg>
-                <p className="mt-4 text-xl font-bold text-[#1f2937] md:text-2xl">Googleマップ</p>
-                <p className="mt-1 text-lg font-bold text-[#1f2937] md:text-xl">（OPEN時に掲載予定）</p>
-              </div>
+            <div className="overflow-hidden rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
+              <iframe
+                src={mapEmbedUrl}
+                width="100%"
+                height="520"
+                style={{ border: 0, display: "block" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="VERDE FIT の地図"
+              />
             </div>
           </FadeIn>
         </div>
