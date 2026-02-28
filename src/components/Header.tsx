@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMenu } from "@/components/MenuProvider";
 
 const navLinks = [
   { href: "#services", label: "整体" },
@@ -16,7 +16,7 @@ type HeaderProps = {
 };
 
 export default function Header({ phone }: HeaderProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isMenuOpen: isOpen, setIsMenuOpen: setIsOpen } = useMenu();
   const telHref = phone ? `tel:${phone.replace(/-/g, "")}` : "#";
 
   return (

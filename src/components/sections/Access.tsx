@@ -53,7 +53,7 @@ export default function Access({ data }: { data?: AccessData | null }) {
           <FadeIn>
             <div>
               <p className="text-sm font-semibold text-green-700 md:text-base">店舗名</p>
-              <h3 className="mt-2 whitespace-nowrap font-serif text-[34px] font-bold leading-tight text-[#1f2937] md:text-[44px]">
+              <h3 className="mt-2 font-serif text-[26px] font-bold leading-tight text-[#1f2937] md:text-[44px]">
                 {storeName}
               </h3>
 

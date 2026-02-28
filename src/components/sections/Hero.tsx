@@ -75,7 +75,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
 
           <FadeIn delay={250} className="order-1 lg:order-2">
             <div
-              className="relative mx-auto w-full max-w-[220px] sm:max-w-[280px] lg:max-w-none overflow-hidden rounded-2xl lg:rounded-full"
+              className="relative mx-auto w-full overflow-hidden rounded-2xl lg:rounded-full"
               style={{ aspectRatio: "1/1" }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}

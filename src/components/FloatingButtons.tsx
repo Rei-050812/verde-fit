@@ -1,11 +1,14 @@
 "use client";
 
+import { useMenu } from "@/components/MenuProvider";
+
 type FloatingButtonsProps = {
   phone?: string;
 };
 
 export default function FloatingButtons({ phone }: FloatingButtonsProps) {
   const telHref = phone ? `tel:${phone.replace(/-/g, "")}` : "#";
+  const { isMenuOpen } = useMenu();
 
   return (
     <>
@@ -13,7 +16,7 @@ export default function FloatingButtons({ phone }: FloatingButtonsProps) {
       <a
         href={telHref}
         aria-label="電話で相談する"
-        className="fixed right-0 top-1/2 z-50 -translate-y-1/2 flex flex-col items-center gap-1 rounded-l-xl border-2 border-green-700 bg-white px-3 py-4 shadow-[-4px_4px_16px_rgba(0,0,0,0.15)] transition-opacity hover:opacity-90"
+        className={`fixed right-0 top-1/2 z-50 -translate-y-1/2 flex flex-col items-center gap-1 rounded-l-xl border-2 border-green-700 bg-white px-3 py-4 shadow-[-4px_4px_16px_rgba(0,0,0,0.15)] transition-opacity hover:opacity-90 ${isMenuOpen ? "hidden" : ""}`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

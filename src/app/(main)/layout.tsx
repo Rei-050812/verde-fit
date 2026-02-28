@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingButtons from "@/components/FloatingButtons";
+import { MenuProvider } from "@/components/MenuProvider";
 import { safeFetch } from "@/sanity/client";
 import { urlForImage } from "@/sanity/image";
 
@@ -97,7 +98,7 @@ export default async function MainLayout({
   const copyrightYear = settings?.copyrightYear ?? undefined;
 
   return (
-    <>
+    <MenuProvider>
       <Header phone={phone} />
       <main>{children}</main>
       <Footer
@@ -109,6 +110,6 @@ export default async function MainLayout({
         copyrightYear={copyrightYear}
       />
       <FloatingButtons phone={phone} />
-    </>
+    </MenuProvider>
   );
 }
