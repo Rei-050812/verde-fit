@@ -4,39 +4,51 @@ import { useState } from "react";
 import FadeIn from "@/components/FadeIn";
 
 type FAQItem = {
-  question: string;
-  answer: string;
+  _key?: string;
+  question?: string | null;
+  answer?: string | null;
 };
 
-const faqItems: FAQItem[] = [
+type FAQData = {
+  sectionTitle?: string | null;
+  sectionDescription?: string | null;
+  items?: FAQItem[] | null;
+};
+
+const defaultFAQItems: FAQItem[] = [
   {
+    _key: "q1",
     question: "初めてでも大丈夫ですか？運動経験がほとんどありません。",
     answer:
       "はい、もちろん大丈夫です。VERDE FITでは、お客様の8割以上が運動未経験または久しぶりの方です。あなたの体力レベルや身体の状態に合わせて、無理のないプログラムを作成しますので、安心してお越しください。",
   },
   {
+    _key: "q2",
     question: "子供連れでも大丈夫ですか？",
     answer:
       "はい、大丈夫です。キッズスペースを完備しており、お子様連れでも安心してお越しいただけます。小さなお子様がいらっしゃる方もお気軽にご相談ください。",
   },
   {
+    _key: "q3",
     question: "どのくらいの頻度で通えばいいですか？",
     answer:
       "お悩みの内容や目標によって異なりますが、初期は週1〜2回、改善が見られてからは月2回程度のメンテナンスをおすすめしています。無理なく続けられるペースで、長期的な健康づくりをサポートします。",
   },
   {
+    _key: "q4",
     question: "整体とパーソナルトレーニング、どちらを選べばいいですか？",
     answer:
       "初回のカウンセリングで、あなたの身体の状態や目標をお聞きし、最適なプランをご提案します。慢性的な痛みがある方は整体から、体力づくりや体型改善が目標の方はパーソナルトレーニングがおすすめですが、両方を組み合わせることも可能です。",
   },
   {
+    _key: "q5",
     question: "支払い方法は何がありますか？",
     answer:
       "現金、クレジットカード、電子マネーに対応しています。回数券をご購入いただくと、1回あたりの料金がお得になります。詳しくは初回カウンセリング時にご説明します。",
   },
 ];
 
-function AccordionItem({ item, index }: { item: FAQItem; index: number }) {
+function AccordionItem({ item }: { item: FAQItem }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -78,23 +90,31 @@ function AccordionItem({ item, index }: { item: FAQItem; index: number }) {
   );
 }
 
-export default function FAQ() {
+export default function FAQ({ data }: { data?: FAQData | null }) {
+  const sectionTitle = data?.sectionTitle ?? "よくある質問";
+  const sectionDescription =
+    data?.sectionDescription ?? "ご予約前の不安や疑問を解消します";
+  const items =
+    data?.items && data.items.length > 0 ? data.items : defaultFAQItems;
+
   return (
     <section id="faq" className="bg-white py-20 md:py-24">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="mb-12 text-center md:mb-14">
-            <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[52px]">よくある質問</h2>
+            <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[52px]">
+              {sectionTitle}
+            </h2>
             <p className="mx-auto mt-4 max-w-3xl text-sm font-medium text-gray-500 md:text-base">
-              ご予約前の不安や疑問を解消します
+              {sectionDescription}
             </p>
           </div>
         </FadeIn>
 
         <FadeIn>
           <div className="space-y-3">
-            {faqItems.map((item, i) => (
-              <AccordionItem key={item.question} item={item} index={i} />
+            {items.map((item, i) => (
+              <AccordionItem key={item._key ?? i} item={item} />
             ))}
           </div>
         </FadeIn>

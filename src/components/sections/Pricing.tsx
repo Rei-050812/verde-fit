@@ -1,47 +1,98 @@
 import FadeIn from "@/components/FadeIn";
 
-const trialBenefits = [
+type PricingItem = {
+  _key?: string;
+  label?: string | null;
+  price?: string | null;
+};
+
+type PricingColumn = {
+  _key?: string;
+  title?: string | null;
+  items?: PricingItem[] | null;
+};
+
+type PricingData = {
+  sectionTitle?: string | null;
+  sectionDescription?: string | null;
+  trialBadge?: string | null;
+  trialTitle?: string | null;
+  trialPrice?: string | null;
+  trialDetails?: string | null;
+  trialDuration?: string | null;
+  trialBenefits?: string[] | null;
+  pricingColumns?: PricingColumn[] | null;
+  pricingNote?: string | null;
+};
+
+const defaultTrialBenefits = [
   "丁寧なカウンセリングで、あなたの悩みをヒアリング",
   "身体の状態を詳しくチェック",
   "あなたに最適なプランをご提案",
 ];
 
-const pricingColumns = [
+const defaultPricingColumns: PricingColumn[] = [
   {
+    _key: "seitai",
     title: "整体コース",
     items: [
-      { label: "30分整体", price: "¥4,400" },
-      { label: "60分整体", price: "¥8,800" },
-      { label: "120分整体", price: "¥13,200" },
+      { _key: "s1", label: "30分整体", price: "¥4,400" },
+      { _key: "s2", label: "60分整体", price: "¥8,800" },
+      { _key: "s3", label: "120分整体", price: "¥13,200" },
     ],
   },
   {
+    _key: "personal",
     title: "パーソナルトレーニング",
     items: [
-      { label: "24回ダイエットプラン", price: "¥198,000" },
-      { label: "1ヶ月/8回 食事指導なし", price: "¥56,000" },
-      { label: "1ヶ月/4回 食事指導なし", price: "¥32,000" },
+      { _key: "p1", label: "24回ダイエットプラン", price: "¥198,000" },
+      { _key: "p2", label: "1ヶ月/8回 食事指導なし", price: "¥56,000" },
+      { _key: "p3", label: "1ヶ月/4回 食事指導なし", price: "¥32,000" },
     ],
   },
   {
+    _key: "coaching",
     title: "コーチング",
     items: [
-      { label: "1ヶ月/4回 オンライン60分", price: "¥28,000" },
-      { label: "1ヶ月/4回 対面60分", price: "¥30,000" },
-      { label: "対面60分", price: "¥8,800" },
+      { _key: "c1", label: "1ヶ月/4回 オンライン60分", price: "¥28,000" },
+      { _key: "c2", label: "1ヶ月/4回 対面60分", price: "¥30,000" },
+      { _key: "c3", label: "対面60分", price: "¥8,800" },
     ],
   },
 ];
 
-export default function Pricing() {
+export default function Pricing({ data }: { data?: PricingData | null }) {
+  const sectionTitle = data?.sectionTitle ?? "料金案内";
+  const sectionDescription =
+    data?.sectionDescription ?? "明瞭な料金体系で、安心してご利用いただけます";
+  const trialBadge = data?.trialBadge ?? "OPEN記念 特別価格";
+  const trialTitle = data?.trialTitle ?? "初回体験コース";
+  const trialPrice = data?.trialPrice ?? "¥5,500";
+  const trialDetails =
+    data?.trialDetails ??
+    "カウンセリング30分 + 整体・パーソナルトレーニング60分";
+  const trialDuration = data?.trialDuration ?? "所要時間：90分";
+  const trialBenefits =
+    data?.trialBenefits && data.trialBenefits.length > 0
+      ? data.trialBenefits
+      : defaultTrialBenefits;
+  const pricingColumns =
+    data?.pricingColumns && data.pricingColumns.length > 0
+      ? data.pricingColumns
+      : defaultPricingColumns;
+  const pricingNote =
+    data?.pricingNote ?? "※すべて税込価格です。回数券プランもございます。";
+
   return (
     <section id="pricing" className="bg-white py-20 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="mb-10 text-center md:mb-12">
-            <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[52px]">料金案内</h2>
+            <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[52px]">
+              {sectionTitle}
+            </h2>
             <p className="mx-auto mt-4 max-w-2xl text-sm font-medium text-gray-500 md:text-base">
-              明瞭な料金体系で、安心してご利用いただけます
+              {sectionDescription}
             </p>
           </div>
         </FadeIn>
@@ -51,17 +102,25 @@ export default function Pricing() {
           <div className="mx-auto mb-6 max-w-xl rounded-xl bg-white px-8 py-8 shadow-[0_10px_30px_rgba(0,0,0,0.08)] md:px-10 md:py-10">
             <div className="text-center">
               <span className="inline-block rounded-full bg-green-700 px-4 py-1 text-[12px] font-semibold text-white md:text-[13px]">
-                OPEN記念 特別価格
+                {trialBadge}
               </span>
-              <h3 className="mt-5 font-serif text-[30px] font-bold text-[#1f2937] md:text-[38px]">初回体験コース</h3>
+              <h3 className="mt-5 font-serif text-[30px] font-bold text-[#1f2937] md:text-[38px]">
+                {trialTitle}
+              </h3>
 
               <div className="mt-3 flex items-end justify-center gap-2">
-                <span className="font-serif text-5xl font-bold text-green-700 md:text-[60px]">¥5,500</span>
-                <span className="pb-2 text-sm font-medium text-gray-500 md:text-base">(税込)</span>
+                <span className="font-serif text-5xl font-bold text-green-700 md:text-[60px]">
+                  {trialPrice}
+                </span>
+                <span className="pb-2 text-sm font-medium text-gray-500 md:text-base">
+                  (税込)
+                </span>
               </div>
 
-              <p className="mt-3 text-base font-semibold text-[#1f2937]">カウンセリング30分 + 整体・パーソナルトレーニング60分</p>
-              <p className="mt-1 text-sm text-gray-500">所要時間：90分</p>
+              <p className="mt-3 text-base font-semibold text-[#1f2937]">
+                {trialDetails}
+              </p>
+              <p className="mt-1 text-sm text-gray-500">{trialDuration}</p>
 
               <a
                 href="#cta"
@@ -71,8 +130,8 @@ export default function Pricing() {
               </a>
 
               <ul className="mx-auto mt-6 max-w-[400px] space-y-2 text-left">
-                {trialBenefits.map((b) => (
-                  <li key={b} className="flex items-start gap-2.5 text-sm text-gray-700">
+                {trialBenefits.map((b, i) => (
+                  <li key={i} className="flex items-start gap-2.5 text-sm text-gray-700">
                     <span className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-green-700 text-[10px] font-bold text-green-700">
                       ✓
                     </span>
@@ -87,17 +146,28 @@ export default function Pricing() {
         {/* 通常料金 */}
         <FadeIn delay={100}>
           <div className="mb-6 rounded-xl bg-white px-8 py-8 shadow-[0_10px_30px_rgba(0,0,0,0.06)] md:px-10 md:py-10">
-            <h3 className="mb-6 text-center font-serif text-2xl font-bold text-[#1f2937] md:text-[32px]">通常料金</h3>
+            <h3 className="mb-6 text-center font-serif text-2xl font-bold text-[#1f2937] md:text-[32px]">
+              通常料金
+            </h3>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
               {pricingColumns.map((col) => (
-                <div key={col.title}>
-                  <h4 className="mb-3 text-sm font-bold text-green-700 md:text-base">{col.title}</h4>
+                <div key={col._key ?? col.title}>
+                  <h4 className="mb-3 text-sm font-bold text-green-700 md:text-base">
+                    {col.title}
+                  </h4>
                   <div className="space-y-2">
-                    {col.items.map((item) => (
-                      <div key={item.label} className="flex items-center justify-between border-b border-gray-100 pb-2">
-                        <p className="text-xs text-gray-600 md:text-[13px]">{item.label}</p>
-                        <p className="text-sm font-bold text-green-700 md:text-base">{item.price}</p>
+                    {col.items?.map((item) => (
+                      <div
+                        key={item._key ?? item.label}
+                        className="flex items-center justify-between border-b border-gray-100 pb-2"
+                      >
+                        <p className="text-xs text-gray-600 md:text-[13px]">
+                          {item.label}
+                        </p>
+                        <p className="text-sm font-bold text-green-700 md:text-base">
+                          {item.price}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -105,7 +175,7 @@ export default function Pricing() {
               ))}
             </div>
 
-            <p className="mt-6 text-center text-xs text-gray-500">※すべて税込価格です。回数券プランもございます。</p>
+            <p className="mt-6 text-center text-xs text-gray-500">{pricingNote}</p>
 
             <div className="mt-6 text-center">
               <a
@@ -122,10 +192,11 @@ export default function Pricing() {
         {/* キャンセルポリシー */}
         <FadeIn delay={150}>
           <div className="rounded-xl bg-white px-8 py-8 shadow-[0_10px_30px_rgba(0,0,0,0.06)] md:px-10 md:py-10">
-            <h3 className="mb-6 text-center font-serif text-2xl font-bold text-[#1f2937] md:text-[32px]">キャンセルポリシー</h3>
+            <h3 className="mb-6 text-center font-serif text-2xl font-bold text-[#1f2937] md:text-[32px]">
+              キャンセルポリシー
+            </h3>
 
             <div className="rounded-lg border border-gray-200 px-6 py-7 text-sm leading-7 text-gray-700 md:px-10 md:py-8">
-              {/* ヘッダー */}
               <div className="mb-6 text-center">
                 <p className="inline-flex items-center gap-2 text-lg font-bold text-[#1f2937]">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="h-6 w-6 text-green-700" aria-hidden="true">
@@ -141,7 +212,6 @@ export default function Pricing() {
               </div>
 
               <div className="space-y-6">
-                {/* キャンセル・変更 */}
                 <div>
                   <p className="mb-2 text-center font-bold text-[#1f2937]">■ キャンセル・変更について</p>
                   <p className="text-center text-[13px] leading-6 text-gray-600">ご予約の変更・キャンセルは、できるだけお早めにご連絡ください。</p>
@@ -156,7 +226,6 @@ export default function Pricing() {
                   </div>
                 </div>
 
-                {/* 無断キャンセル */}
                 <div>
                   <p className="mb-2 text-center font-bold text-[#1f2937]">■ 無断キャンセルについて</p>
                   <p className="text-center text-[13px] leading-7 text-gray-600">
@@ -165,7 +234,6 @@ export default function Pricing() {
                   </p>
                 </div>
 
-                {/* 遅刻 */}
                 <div>
                   <p className="mb-2 text-center font-bold text-[#1f2937]">■ 遅刻について</p>
                   <p className="text-center text-[13px] leading-7 text-gray-600">
@@ -174,13 +242,11 @@ export default function Pricing() {
                   </p>
                 </div>
 
-                {/* 体調不良 */}
                 <div>
                   <p className="mb-2 text-center font-bold text-[#1f2937]">■ 体調不良・やむを得ない事情の場合</p>
                   <p className="text-center text-[13px] leading-7 text-gray-600">
                     体調不良や急なご事情の際は、無理をなさらずお早めにご連絡ください。<br />
-                    医師の診断書の提出など客観的にやむを得ない理由が確認できる場合は、個別に対応させていただきます。<br />
-                    なお、「悪天候」「気分」「他のご予定」などの理由によるキャンセルは通常のキャンセル規定の対象となります。
+                    医師の診断書の提出など客観的にやむを得ない理由が確認できる場合は、個別に対応させていただきます。
                   </p>
                 </div>
               </div>

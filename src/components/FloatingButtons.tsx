@@ -1,11 +1,17 @@
 "use client";
 
-export default function FloatingButtons() {
+type FloatingButtonsProps = {
+  phone?: string;
+};
+
+export default function FloatingButtons({ phone }: FloatingButtonsProps) {
+  const telHref = phone ? `tel:${phone.replace(/-/g, "")}` : "tel:0000000000";
+
   return (
     <>
       {/* 電話ボタン（右端に縦付き） */}
       <a
-        href="tel:0000000000"
+        href={telHref}
         aria-label="電話で相談する"
         className="fixed right-0 top-1/2 z-50 -translate-y-1/2 flex flex-col items-center gap-1 rounded-l-xl border-2 border-green-700 bg-white px-3 py-4 shadow-[0_4px_16px_rgba(0,0,0,0.20)] transition-opacity hover:opacity-90"
       >

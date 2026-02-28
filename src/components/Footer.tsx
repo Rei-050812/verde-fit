@@ -1,3 +1,11 @@
+type FooterProps = {
+  phone?: string;
+  instagramUrl?: string;
+  facebookUrl?: string;
+  lineUrl?: string;
+  footerDescription?: string;
+  copyrightYear?: string;
+};
 
 const footerLinks = [
   { href: "/", label: "TOP" },
@@ -43,7 +51,21 @@ function PhoneIcon() {
   );
 }
 
-export default function Footer() {
+export default function Footer({
+  phone,
+  instagramUrl,
+  facebookUrl,
+  lineUrl,
+  footerDescription,
+  copyrightYear,
+}: FooterProps) {
+  const telHref = phone ? `tel:${phone.replace(/-/g, "")}` : "tel:0000000000";
+  const telDisplay = phone ?? "0000000000";
+  const year = copyrightYear ?? "2026";
+  const description =
+    footerDescription ??
+    "横手市に誕生する、本格トータルケアサロン。整体・パーソナルトレーニング・コーチングで、あなたの健康を総合サポートします。";
+
   return (
     <footer className="bg-white border-t border-gray-100">
       <div className="mx-auto max-w-7xl px-4 pb-12 pt-14 sm:px-6 lg:px-8 lg:pt-16">
@@ -62,7 +84,7 @@ export default function Footer() {
             </a>
 
             <p className="mt-4 max-w-xs text-sm leading-7 text-gray-600">
-              横手市に誕生する、本格トータルケアサロン。整体・パーソナルトレーニング・コーチングで、あなたの健康を総合サポートします。
+              {description}
             </p>
 
             <div className="mt-5 space-y-1.5 text-sm text-gray-600">
@@ -73,11 +95,11 @@ export default function Footer() {
             </div>
 
             <a
-              href="tel:0000000000"
+              href={telHref}
               className="mt-6 inline-flex items-center gap-2 rounded-lg bg-green-700 px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-green-800"
             >
               <PhoneIcon />
-              お電話でのご相談
+              {telDisplay}
             </a>
           </div>
 
@@ -97,13 +119,25 @@ export default function Footer() {
           <div>
             <h3 className="text-base font-bold text-[#1f2937]">SNS</h3>
             <div className="mt-4 flex items-center gap-3">
-              <a href="#" aria-label="Instagram" className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-green-600 transition-colors hover:bg-green-100">
+              <a
+                href={instagramUrl ?? "#"}
+                aria-label="Instagram"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-green-600 transition-colors hover:bg-green-100"
+              >
                 <InstagramIcon />
               </a>
-              <a href="#" aria-label="Facebook" className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-green-600 transition-colors hover:bg-green-100">
+              <a
+                href={facebookUrl ?? "#"}
+                aria-label="Facebook"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-green-600 transition-colors hover:bg-green-100"
+              >
                 <FacebookIcon />
               </a>
-              <a href="#" aria-label="Line" className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-green-600 transition-colors hover:bg-green-100">
+              <a
+                href={lineUrl ?? "#"}
+                aria-label="Line"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-green-600 transition-colors hover:bg-green-100"
+              >
                 <ChatIcon />
               </a>
             </div>
@@ -112,7 +146,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-gray-200 py-5 text-center text-xs text-gray-400">
-        © 2026 VERDE FIT All rights reserved.
+        © {year} VERDE FIT All rights reserved.
       </div>
     </footer>
   );

@@ -1,0 +1,237 @@
+import { safeFetch } from "@/sanity/client";
+import Hero from "@/components/sections/Hero";
+import Services from "@/components/sections/Services";
+import Concerns from "@/components/sections/Concerns";
+import Reasons from "@/components/sections/Reasons";
+import Testimonials from "@/components/sections/Testimonials";
+import Profile from "@/components/sections/Profile";
+import Pricing from "@/components/sections/Pricing";
+import FAQ from "@/components/sections/FAQ";
+import Access from "@/components/sections/Access";
+import CTA from "@/components/sections/CTA";
+
+// ─── Sanity raw types ────────────────────────────────────────────
+type SanityImageRef = { asset: { _ref: string; _type: string }; hotspot?: unknown };
+
+type HeroSanity = {
+  badge?: string;
+  heading?: string;
+  subheadingLocation?: string;
+  description?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  primaryButtonText?: string;
+  secondaryButtonText?: string;
+};
+
+type ServiceItem = {
+  _key: string;
+  title?: string;
+  description?: string;
+  buttonText?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+};
+type ServicesSanity = {
+  sectionTitle?: string;
+  sectionDescription?: string;
+  serviceList?: ServiceItem[];
+};
+
+type ConcernItem = { _key: string; title?: string; description?: string };
+type ConcernsSanity = {
+  sectionTitle?: string;
+  sectionDescription?: string;
+  concernList?: ConcernItem[];
+  rootCauseTitle?: string;
+  rootCauseText?: string;
+};
+
+type ReasonItem = {
+  _key: string;
+  number?: string;
+  title?: string;
+  description?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+};
+type ReasonsSanity = {
+  sectionTitle?: string;
+  sectionDescription?: string;
+  reasonList?: ReasonItem[];
+};
+
+type VoiceItem = {
+  _key: string;
+  goal?: string;
+  demographics?: string;
+  result?: string;
+  imageUrl?: string;
+};
+type TestimonialsSanity = {
+  sectionTitle?: string;
+  sectionDescription?: string;
+  voiceList?: VoiceItem[];
+};
+
+type ProfileSanity = {
+  sectionTitle?: string;
+  sectionDescription?: string;
+  role?: string;
+  name?: string;
+  imageUrl?: string;
+  beliefTitle?: string;
+  beliefDescription?: string;
+  highlight?: string;
+  closingText?: string;
+  credentials?: string[];
+};
+
+type PricingItem = { _key: string; label?: string; price?: string };
+type PricingColumn = { _key: string; title?: string; items?: PricingItem[] };
+type PricingSanity = {
+  sectionTitle?: string;
+  sectionDescription?: string;
+  trialBadge?: string;
+  trialTitle?: string;
+  trialPrice?: string;
+  trialDetails?: string;
+  trialDuration?: string;
+  trialBenefits?: string[];
+  pricingColumns?: PricingColumn[];
+  pricingNote?: string;
+};
+
+type FAQItem = { _key: string; question?: string; answer?: string };
+type FAQSanity = {
+  sectionTitle?: string;
+  sectionDescription?: string;
+  items?: FAQItem[];
+};
+
+type AccessSanity = {
+  sectionTitle?: string;
+  sectionDescription?: string;
+  storeName?: string;
+  postalCode?: string;
+  address?: string;
+  phone?: string;
+  hours?: string;
+  lastEntry?: string;
+  closedDays?: string;
+  closedDaysNote?: string;
+  parking?: string;
+  payment?: string;
+};
+
+type CTASanity = {
+  heading?: string;
+  description?: string;
+  primaryButtonText?: string;
+  secondaryButtonText?: string;
+};
+
+// ─── Raw Sanity types (with image objects) ────────────────────────
+type HeroRaw = Omit<HeroSanity, "imageUrl"> & { image?: SanityImageRef };
+type ServiceRaw = Omit<ServiceItem, "imageUrl"> & { image?: SanityImageRef };
+type ReasonRaw = Omit<ReasonItem, "imageUrl"> & { image?: SanityImageRef };
+type VoiceRaw = Omit<VoiceItem, "imageUrl"> & { image?: SanityImageRef };
+type ProfileRaw = Omit<ProfileSanity, "imageUrl"> & { image?: SanityImageRef };
+type ServicesRaw = Omit<ServicesSanity, "serviceList"> & { serviceList?: ServiceRaw[] };
+type ReasonsRaw = Omit<ReasonsSanity, "reasonList"> & { reasonList?: ReasonRaw[] };
+type TestimonialsRaw = Omit<TestimonialsSanity, "voiceList"> & { voiceList?: VoiceRaw[] };
+
+function imgUrl(ref: SanityImageRef | undefined): string | undefined {
+  if (!ref?.asset?._ref) return undefined;
+  // Extract URL from Sanity asset reference using CDN pattern
+  // Format: image-{id}-{width}x{height}-{format}
+  const ref_str = ref.asset._ref;
+  const parts = ref_str.replace("image-", "").split("-");
+  const format = parts.pop();
+  const dims = parts.pop();
+  const id = parts.join("-");
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
+  if (!projectId) return undefined;
+  return `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${dims}.${format}`;
+}
+
+export default async function Home() {
+  const [
+    heroRaw,
+    servicesRaw,
+    concernsData,
+    reasonsRaw,
+    testimonialsRaw,
+    profileRaw,
+    pricingData,
+    faqData,
+    accessData,
+    ctaData,
+  ] = await Promise.all([
+    safeFetch<HeroRaw>(`*[_type == "hero"][0]`),
+    safeFetch<ServicesRaw>(`*[_type == "services"][0]`),
+    safeFetch<ConcernsSanity>(`*[_type == "concerns"][0]`),
+    safeFetch<ReasonsRaw>(`*[_type == "reasons"][0]`),
+    safeFetch<TestimonialsRaw>(`*[_type == "testimonials"][0]`),
+    safeFetch<ProfileRaw>(`*[_type == "profile"][0]`),
+    safeFetch<PricingSanity>(`*[_type == "pricing"][0]`),
+    safeFetch<FAQSanity>(`*[_type == "faqSection"][0]`),
+    safeFetch<AccessSanity>(`*[_type == "access"][0]`),
+    safeFetch<CTASanity>(`*[_type == "cta"][0]`),
+  ]);
+
+  // Transform: resolve image URLs
+  const heroData: HeroSanity | null = heroRaw
+    ? { ...heroRaw, imageUrl: imgUrl(heroRaw.image) }
+    : null;
+
+  const servicesData: ServicesSanity | null = servicesRaw
+    ? {
+        ...servicesRaw,
+        serviceList: servicesRaw.serviceList?.map((s) => ({
+          ...s,
+          imageUrl: imgUrl(s.image),
+        })),
+      }
+    : null;
+
+  const reasonsData: ReasonsSanity | null = reasonsRaw
+    ? {
+        ...reasonsRaw,
+        reasonList: reasonsRaw.reasonList?.map((r) => ({
+          ...r,
+          imageUrl: imgUrl(r.image),
+        })),
+      }
+    : null;
+
+  const testimonialsData: TestimonialsSanity | null = testimonialsRaw
+    ? {
+        ...testimonialsRaw,
+        voiceList: testimonialsRaw.voiceList?.map((v) => ({
+          ...v,
+          imageUrl: imgUrl(v.image),
+        })),
+      }
+    : null;
+
+  const profileData: ProfileSanity | null = profileRaw
+    ? { ...profileRaw, imageUrl: imgUrl(profileRaw.image) }
+    : null;
+
+  return (
+    <>
+      <Hero data={heroData} />
+      <Services data={servicesData} />
+      <Concerns data={concernsData} />
+      <Reasons data={reasonsData} />
+      <Testimonials data={testimonialsData} />
+      <Profile data={profileData} />
+      <Pricing data={pricingData} />
+      <FAQ data={faqData} />
+      <Access data={accessData} />
+      <CTA data={ctaData} />
+    </>
+  );
+}

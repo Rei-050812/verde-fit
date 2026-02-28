@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import FloatingButtons from "@/components/FloatingButtons";
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
@@ -23,20 +20,6 @@ export const metadata: Metadata = {
   title: "VERDE FIT | 横手市の整体・パーソナルトレーニング・コーチングサロン",
   description:
     "2026年春、横手市にグランドオープン。整体×パーソナルトレーニング×コーチングで、カラダとココロを根本から整えるトータルケアサロンVERDE FIT。",
-  keywords: [
-    "横手市",
-    "整体",
-    "パーソナルトレーニング",
-    "コーチング",
-    "VERDE FIT",
-  ],
-  openGraph: {
-    title: "VERDE FIT | 横手市の整体・パーソナルトレーニング・コーチングサロン",
-    description:
-      "整体×パーソナルトレーニング×コーチングで、カラダとココロを根本から整えるトータルケアサロン",
-    locale: "ja_JP",
-    type: "website",
-  },
 };
 
 export default function RootLayout({
@@ -46,11 +29,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={`${notoSansJP.variable} ${notoSerifJP.variable} antialiased`}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <FloatingButtons />
+      <body
+        className={`${notoSansJP.variable} ${notoSerifJP.variable} antialiased`}
+      >
+        {children}
       </body>
     </html>
   );

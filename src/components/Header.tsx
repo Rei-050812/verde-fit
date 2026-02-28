@@ -11,8 +11,14 @@ const navLinks = [
   { href: "#access", label: "アクセス" },
 ];
 
-export default function Header() {
+type HeaderProps = {
+  phone?: string;
+};
+
+export default function Header({ phone }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const telHref = phone ? `tel:${phone.replace(/-/g, "")}` : "tel:0000000000";
+  const telDisplay = phone ?? "0000000000";
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-sm">
@@ -43,7 +49,7 @@ export default function Header() {
               </a>
             ))}
             <a
-              href="tel:0000000000"
+              href={telHref}
               className="inline-flex items-center justify-center gap-1.5 rounded-md bg-green-700 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-800"
             >
               <svg
@@ -61,7 +67,7 @@ export default function Header() {
                   d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.63 2.62a2 2 0 0 1-.45 2.11L8 9.91a16 16 0 0 0 6.09 6.09l1.46-1.29a2 2 0 0 1 2.11-.45c.84.3 1.72.51 2.62.63A2 2 0 0 1 22 16.92z"
                 />
               </svg>
-              電話
+              {telDisplay}
             </a>
             <a
               href="#cta"
@@ -105,7 +111,7 @@ export default function Header() {
               </a>
             ))}
             <a
-              href="tel:0000000000"
+              href={telHref}
               className="inline-flex items-center justify-center gap-1.5 rounded-md bg-green-700 px-5 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-green-800"
               onClick={() => setIsOpen(false)}
             >
@@ -124,7 +130,7 @@ export default function Header() {
                   d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.63 2.62a2 2 0 0 1-.45 2.11L8 9.91a16 16 0 0 0 6.09 6.09l1.46-1.29a2 2 0 0 1 2.11-.45c.84.3 1.72.51 2.62.63A2 2 0 0 1 22 16.92z"
                 />
               </svg>
-              電話
+              {telDisplay}
             </a>
             <a
               href="#cta"

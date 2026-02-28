@@ -1,14 +1,46 @@
-﻿import FadeIn from "@/components/FadeIn";
+import FadeIn from "@/components/FadeIn";
 
-export default function Access() {
+type AccessData = {
+  sectionTitle?: string | null;
+  sectionDescription?: string | null;
+  storeName?: string | null;
+  postalCode?: string | null;
+  address?: string | null;
+  phone?: string | null;
+  hours?: string | null;
+  lastEntry?: string | null;
+  closedDays?: string | null;
+  closedDaysNote?: string | null;
+  parking?: string | null;
+  payment?: string | null;
+};
+
+export default function Access({ data }: { data?: AccessData | null }) {
+  const sectionTitle = data?.sectionTitle ?? "店舗情報・アクセス";
+  const sectionDescription =
+    data?.sectionDescription ?? "横手市に、2026年春、OPEN予定です";
+  const storeName = data?.storeName ?? "VERDE FIT（ヴェルデフィット）";
+  const postalCode = data?.postalCode ?? "〒013-0061";
+  const address = data?.address ?? "秋田県横手市横手町四ノ口125-1";
+  const phone = data?.phone ?? "現在取得中（OPEN前にご案内します）";
+  const hours = data?.hours ?? "10:00〜21:00";
+  const lastEntry =
+    data?.lastEntry ?? "最終受付 20:30（1時間コースは20:00まで）";
+  const closedDays = data?.closedDays ?? "不定休";
+  const closedDaysNote = data?.closedDaysNote ?? "※SNS等で事前にお知らせ";
+  const parking = data?.parking ?? "専用駐車場あり（無料）";
+  const payment = data?.payment ?? "現金 / クレジットカード / 電子マネー";
+
   return (
     <section id="access" className="bg-[#e8f3ec] py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="mb-12 text-center md:mb-14">
-            <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[52px]">店舗情報・アクセス</h2>
+            <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[52px]">
+              {sectionTitle}
+            </h2>
             <p className="mx-auto mt-4 max-w-2xl text-sm font-medium text-gray-500 md:text-xl">
-              横手市に、2026年春、OPEN予定です
+              {sectionDescription}
             </p>
           </div>
         </FadeIn>
@@ -18,7 +50,7 @@ export default function Access() {
             <div>
               <p className="text-sm font-semibold text-green-700 md:text-base">店舗名</p>
               <h3 className="mt-2 whitespace-nowrap font-serif text-[34px] font-bold leading-tight text-[#1f2937] md:text-[44px]">
-                VERDE FIT（ヴェルデフィット）
+                {storeName}
               </h3>
 
               <div className="mt-8 space-y-4">
@@ -32,8 +64,8 @@ export default function Access() {
                     </span>
                     住所
                   </p>
-                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">〒013-0061</p>
-                  <p className="text-sm leading-7 text-gray-600 md:text-base">秋田県横手市横手町四ノ口125-1</p>
+                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">{postalCode}</p>
+                  <p className="text-sm leading-7 text-gray-600 md:text-base">{address}</p>
                 </div>
 
                 <div>
@@ -45,7 +77,7 @@ export default function Access() {
                     </span>
                     電話番号
                   </p>
-                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">現在取得中（OPEN前にご案内します）</p>
+                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">{phone}</p>
                 </div>
 
                 <div>
@@ -58,8 +90,8 @@ export default function Access() {
                     </span>
                     営業時間
                   </p>
-                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">10:00〜21:00</p>
-                  <p className="text-sm leading-7 text-gray-600 md:text-base">最終受付 20:30（1時間コースは20:00まで）</p>
+                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">{hours}</p>
+                  <p className="text-sm leading-7 text-gray-600 md:text-base">{lastEntry}</p>
                 </div>
 
                 <div>
@@ -72,8 +104,10 @@ export default function Access() {
                     </span>
                     定休日
                   </p>
-                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">不定休</p>
-                  <p className="text-sm leading-7 text-gray-600 md:text-base">※SNS等で事前にお知らせ</p>
+                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">{closedDays}</p>
+                  {closedDaysNote && (
+                    <p className="text-sm leading-7 text-gray-600 md:text-base">{closedDaysNote}</p>
+                  )}
                 </div>
 
                 <div>
@@ -88,7 +122,7 @@ export default function Access() {
                     </span>
                     駐車場
                   </p>
-                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">専用駐車場あり（無料）</p>
+                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">{parking}</p>
                 </div>
 
                 <div>
@@ -101,7 +135,7 @@ export default function Access() {
                     </span>
                     お支払い方法
                   </p>
-                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">現金 / クレジットカード / 電子マネー</p>
+                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">{payment}</p>
                 </div>
               </div>
             </div>
