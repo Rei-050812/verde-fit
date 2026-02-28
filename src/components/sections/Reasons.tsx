@@ -4,7 +4,8 @@ type Reason = {
   number: string;
   title: string;
   description: string;
-  icon: "shield" | "target" | "heart";
+  image: string;
+  imageAlt: string;
 };
 
 const reasons: Reason[] = [
@@ -13,59 +14,40 @@ const reasons: Reason[] = [
     title: "国家資格と豊富な実績",
     description:
       "柔道整復師、NSCA-CPT、認定ボディメイクコーチと確かな国家資格と民間資格を持つプロフェッショナルが施術・指導を担当します。10年間で延べ5,000人以上をサポートしてきた経験と最新の知識・技術を組み合わせてあなたに最適なアプローチを提供。横手市に信頼で選ばれる施術のプロが誕生します。",
-    icon: "shield",
+    image: "/reason-01.png",
+    imageAlt: "プロの手による施術",
   },
   {
     number: "02",
     title: "トータルケアの独自メソッド",
     description:
       "整体だけ、トレーニングだけでは到達できない、真の健康状態へ。VERDE FITでは、身体を整える整体、動ける身体をつくるトレーニング、そして継続する習慣をつくるコーチングを統合。3つの専門性を掛け合わせた独自のメソッドで、一時的な改善ではなく、生涯続く健康的なライフスタイルを実現します。",
-    icon: "target",
+    image: "/reason-02.png",
+    imageAlt: "理想の身体を実現した女性",
   },
   {
     number: "03",
     title: "完全個別対応の丁寧なサポート",
     description:
       "マンツーマンの完全個別対応であなただけのプログラムを作成。大手ジムのような画一的なメニューではなく、一人ひとりの身体の状態、生活習慣、目標に合わせたオーダーメイドの施術・トレーニングを提供します。キッズスペース完備でお子様連れでも安心してお越しいただけます。",
-    icon: "heart",
+    image: "/reason-03.png",
+    imageAlt: "丁寧な個別サポート",
   },
 ];
 
-function ReasonIcon({ icon }: { icon: Reason["icon"] }) {
-  if (icon === "target") {
-    return (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="h-20 w-20 text-green-600" aria-hidden="true">
-        <circle cx="12" cy="12" r="8" />
-        <circle cx="12" cy="12" r="4.8" />
-        <circle cx="12" cy="12" r="1.8" fill="currentColor" stroke="none" />
-      </svg>
-    );
-  }
-
-  if (icon === "heart") {
-    return (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="h-20 w-20 text-green-600" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M20.8 7.1a4.9 4.9 0 0 0-6.9 0L12 9l-1.9-1.9a4.9 4.9 0 0 0-6.9 6.9L12 22l8.8-8a4.9 4.9 0 0 0 0-6.9z" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="h-20 w-20 text-green-600" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l6.5 2.5v5.8c0 4.2-2.6 7.3-6.5 9.7-3.9-2.4-6.5-5.5-6.5-9.7V5.5L12 3z" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9.2 11.9l1.9 1.9 3.8-3.8" />
-    </svg>
-  );
-}
-
-function ReasonVisual({ icon, align = "center" }: { icon: Reason["icon"]; align?: "start" | "center" | "end" }) {
+function ReasonVisual({ image, imageAlt, align = "center" }: { image: string; imageAlt: string; align?: "start" | "center" | "end" }) {
   return (
     <div
       className={`aspect-square w-full max-w-[340px] ${
         align === "start" ? "justify-self-start" : align === "end" ? "justify-self-end" : "justify-self-center"
-      } flex items-center justify-center overflow-hidden rounded-xl bg-[#e8f0e8] shadow-[0_4px_16px_rgba(0,0,0,0.04)]`}
+      } overflow-hidden rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.08)]`}
     >
-      <ReasonIcon icon={icon} />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={image}
+        alt={imageAlt}
+        className="h-full w-full object-cover object-center"
+      />
     </div>
   );
 }
@@ -94,7 +76,7 @@ export default function Reasons() {
                     reverse ? "md:grid-cols-[minmax(0,1fr)_360px]" : "md:grid-cols-[360px_minmax(0,1fr)]"
                   }`}
                 >
-                  {!reverse && <ReasonVisual icon={reason.icon} align="start" />}
+                  {!reverse && <ReasonVisual image={reason.image} imageAlt={reason.imageAlt} align="start" />}
 
                   <div className={`${reverse ? "md:order-1" : ""} pt-1`}>
                     <div className="mb-3 flex items-center gap-3">
@@ -108,7 +90,7 @@ export default function Reasons() {
 
                   {reverse && (
                     <div className="md:order-2">
-                      <ReasonVisual icon={reason.icon} align="end" />
+                      <ReasonVisual image={reason.image} imageAlt={reason.imageAlt} align="end" />
                     </div>
                   )}
                 </article>

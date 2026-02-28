@@ -23,19 +23,13 @@ export default function Profile() {
 
         <div className="grid items-start gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-12">
           <FadeIn>
-            <div className="flex aspect-[4/5] items-center justify-center rounded-2xl bg-gradient-to-r from-[#efebe2] to-[#e7efe7] shadow-[0_8px_24px_rgba(0,0,0,0.03)]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.3"
-                className="h-20 w-20 text-green-300"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="7" r="3.1" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6.5 20v-2.3a4.6 4.6 0 0 1 4.6-4.6h1.8a4.6 4.6 0 0 1 4.6 4.6V20" />
-              </svg>
+            <div className="overflow-hidden rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.10)]" style={{aspectRatio: "4/5"}}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/profile.png"
+                alt="代表 吉田宗太郎"
+                className="h-full w-full object-cover object-top"
+              />
             </div>
           </FadeIn>
 

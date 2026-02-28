@@ -10,6 +10,8 @@ type ServiceCard = {
   icon: "seitai" | "personal" | "coaching";
   topBg: string;
   buttonClass: string;
+  image: string;
+  imageAlt: string;
 };
 
 const serviceCards: ServiceCard[] = [
@@ -23,8 +25,9 @@ const serviceCards: ServiceCard[] = [
     lineColor: "bg-green-700",
     icon: "seitai",
     topBg: "bg-gradient-to-r from-green-700 via-green-500 to-[#c4d8c8]",
-    buttonClass:
-      "border-green-700 text-green-700 hover:bg-green-50",
+    buttonClass: "border-green-700 text-green-700 hover:bg-green-50",
+    image: "/service-seitai.png",
+    imageAlt: "整体施術のシーン",
   },
   {
     key: "personal",
@@ -36,8 +39,9 @@ const serviceCards: ServiceCard[] = [
     lineColor: "bg-green-700",
     icon: "personal",
     topBg: "bg-gradient-to-r from-green-700 via-green-500 to-[#c4d8c8]",
-    buttonClass:
-      "border-green-700 text-green-700 hover:bg-green-50",
+    buttonClass: "border-green-700 text-green-700 hover:bg-green-50",
+    image: "/service-personal.png",
+    imageAlt: "パーソナルトレーニングのシーン",
   },
   {
     key: "coaching",
@@ -49,8 +53,9 @@ const serviceCards: ServiceCard[] = [
     lineColor: "bg-green-700",
     icon: "coaching",
     topBg: "bg-gradient-to-r from-green-700 via-green-500 to-[#c4d8c8]",
-    buttonClass:
-      "border-green-700 text-green-700 hover:bg-green-50",
+    buttonClass: "border-green-700 text-green-700 hover:bg-green-50",
+    image: "/service-coaching.png",
+    imageAlt: "コーチングセッションのシーン",
   },
 ];
 
@@ -125,8 +130,13 @@ export default function Services() {
           {serviceCards.map((service, i) => (
             <FadeIn key={service.key} delay={i * 120}>
               <article className="flex h-full flex-col bg-white shadow-[0_8px_28px_rgba(0,0,0,0.04)]">
-                <div className={`flex h-48 items-center justify-center ${service.topBg}`}>
-                  <ServiceIcon icon={service.icon} />
+                <div className="h-64 overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={service.image}
+                    alt={service.imageAlt}
+                    className="h-full w-full object-cover object-top"
+                  />
                 </div>
 
                 <div className="flex flex-1 flex-col px-7 pb-8 pt-7">

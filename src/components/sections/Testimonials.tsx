@@ -69,10 +69,10 @@ export default function Testimonials() {
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {voices.map((v, i) => (
-            <FadeIn key={i} delay={i * 80}>
-              <article className="flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
+            <FadeIn key={i} delay={i * 80} className="h-full">
+              <article className="flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
                 {/* ヘッダー */}
                 <div className="bg-[#e8f2ec] px-5 py-4 text-center">
                   <p className="text-[15px] font-bold text-[#1f2937]">{v.goal}</p>
@@ -90,7 +90,7 @@ export default function Testimonials() {
                 </div>
 
                 {/* 結果テキスト */}
-                <div className="px-5 py-5 text-center">
+                <div className="flex flex-1 items-center justify-center px-5 py-5 text-center">
                   <p className="text-[15px] font-bold leading-7 text-[#1f2937] whitespace-pre-line">
                     {v.result}
                   </p>

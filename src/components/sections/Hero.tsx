@@ -56,20 +56,13 @@ export default function Hero() {
           </div>
 
           <FadeIn delay={250}>
-            <div className="flex aspect-[4/3] items-center justify-center rounded-2xl bg-[#d8e8d8] shadow-[0_8px_28px_rgba(0,0,0,0.06)]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                className="h-20 w-20 text-green-400"
-                aria-hidden="true"
-              >
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 9l4-4 4 4 4-4 4 4" />
-                <circle cx="8.5" cy="8.5" r="1.5" />
-              </svg>
+            <div className="relative mx-auto overflow-hidden rounded-full" style={{aspectRatio: "1/1"}}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/hero.png"
+                alt="ストレッチをする女性"
+                className="absolute inset-0 h-full w-full object-cover object-top"
+              />
             </div>
           </FadeIn>
         </div>
