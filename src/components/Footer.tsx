@@ -1,13 +1,12 @@
-﻿import Link from "next/link";
 
 const footerLinks = [
+  { href: "/", label: "TOP" },
   { href: "#services", label: "整体" },
   { href: "#personal", label: "パーソナルトレーニング" },
   { href: "#coaching", label: "コーチング" },
   { href: "#pricing", label: "料金" },
+  { href: "#testimonials", label: "お客様の声" },
   { href: "#blog", label: "ブログ" },
-  { href: "#faq", label: "よくあるご質問" },
-  { href: "#access", label: "アクセス" },
 ];
 
 function InstagramIcon() {
@@ -22,8 +21,8 @@ function InstagramIcon() {
 
 function FacebookIcon() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden="true">
-      <path d="M13.5 22v-8h2.7l.4-3.1h-3.1V9c0-.9.3-1.6 1.6-1.6h1.7V4.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.4v2h-2.8V14h2.8v8h2.7z" />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
     </svg>
   );
 }
@@ -36,37 +35,58 @@ function ChatIcon() {
   );
 }
 
+function PhoneIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.63 2.62a2 2 0 0 1-.45 2.11L8 9.91a16 16 0 0 0 6.09 6.09l1.46-1.29a2 2 0 0 1 2.11-.45c.84.3 1.72.51 2.62.63A2 2 0 0 1 22 16.92z" />
+    </svg>
+  );
+}
+
 export default function Footer() {
   return (
-    <footer className="bg-[#1f2b3d] text-white">
+    <footer className="bg-white border-t border-gray-100">
       <div className="mx-auto max-w-7xl px-4 pb-12 pt-14 sm:px-6 lg:px-8 lg:pt-16">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.3fr_0.8fr_0.9fr] md:gap-12">
           <div>
-            <Link href="/" className="mb-5 inline-flex items-center gap-3">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-green-700 text-xs font-bold text-white">
-                VF
-              </span>
-              <span className="font-serif text-[28px] font-semibold leading-none text-white">VERDE FIT</span>
-            </Link>
+            <a href="/" className="mb-5 inline-flex items-center gap-2">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo.svg"
+                alt="VERDE FIT ロゴ"
+                width={36}
+                height={36}
+                className="h-9 w-9 object-contain rounded-full"
+              />
+              <span className="font-serif text-[22px] font-semibold leading-none text-[#1f2937]">VERDE FIT</span>
+            </a>
 
-            <p className="max-w-md text-sm leading-7 text-slate-200">
+            <p className="mt-4 max-w-xs text-sm leading-7 text-gray-600">
               横手市に誕生する、本格トータルケアサロン。整体・パーソナルトレーニング・コーチングで、あなたの健康を総合サポートします。
             </p>
 
-            <div className="mt-6 space-y-1.5 text-sm text-slate-300">
+            <div className="mt-5 space-y-1.5 text-sm text-gray-600">
               <p>〒013-0061</p>
               <p>秋田県横手市横手町四ノ口125-1</p>
               <p>営業時間: 10:00〜21:00（最終受付20:30）</p>
               <p>定休日: 毎週木曜日、不定休</p>
             </div>
+
+            <a
+              href="tel:0000000000"
+              className="mt-6 inline-flex items-center gap-2 rounded-lg bg-green-700 px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-green-800"
+            >
+              <PhoneIcon />
+              お電話でのご相談
+            </a>
           </div>
 
           <div>
-            <h3 className="text-lg font-bold text-white">メニュー</h3>
+            <h3 className="text-base font-bold text-[#1f2937]">メニュー</h3>
             <ul className="mt-4 space-y-2.5">
               {footerLinks.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="text-sm text-slate-200 transition-colors hover:text-white">
+                  <a href={link.href} className="text-sm text-gray-600 transition-colors hover:text-green-700">
                     {link.label}
                   </a>
                 </li>
@@ -75,15 +95,15 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold text-white">SNS</h3>
+            <h3 className="text-base font-bold text-[#1f2937]">SNS</h3>
             <div className="mt-4 flex items-center gap-3">
-              <a href="#" aria-label="Instagram" className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-600/40 text-slate-100 transition-colors hover:bg-slate-500/50">
+              <a href="#" aria-label="Instagram" className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-green-600 transition-colors hover:bg-green-100">
                 <InstagramIcon />
               </a>
-              <a href="#" aria-label="Facebook" className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-600/40 text-slate-100 transition-colors hover:bg-slate-500/50">
+              <a href="#" aria-label="Facebook" className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-green-600 transition-colors hover:bg-green-100">
                 <FacebookIcon />
               </a>
-              <a href="#" aria-label="Chat" className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-600/40 text-slate-100 transition-colors hover:bg-slate-500/50">
+              <a href="#" aria-label="Line" className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-green-50 text-green-600 transition-colors hover:bg-green-100">
                 <ChatIcon />
               </a>
             </div>
@@ -91,7 +111,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-slate-500/30 py-5 text-center text-xs text-slate-300">
+      <div className="border-t border-gray-200 py-5 text-center text-xs text-gray-400">
         © 2026 VERDE FIT All rights reserved.
       </div>
     </footer>

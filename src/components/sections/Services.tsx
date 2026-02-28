@@ -17,7 +17,7 @@ const serviceCards: ServiceCard[] = [
     key: "seitai",
     title: "整体",
     description:
-      "国家資格を持つ柔道整復師による、根本改善の整体施術。肩こり・腰痛・姿勢の歪みなど、痛みの原因を徹底的に分析し、その場しのぎではない本当の改善を目指します。10年の実績で培った技術で、痛みのない日常を取り戻しましょう。横手市で、プロフェッショナルな整体をご体験ください。",
+      "厚生労働省認可の国家資格保有者があなたにあった最適な施術を提供。肩こり・腰痛・姿勢の歪みなど、痛みの原因を徹底的に分析し根本改善を目指します。10年の実績で培った確かな技術で痛みのない日常を取り戻しましょう。横手市でプロフェッショナルな整体をあなたに。",
     button: "整体の詳細を見る",
     titleColor: "text-green-700",
     lineColor: "bg-green-700",
@@ -32,12 +32,12 @@ const serviceCards: ServiceCard[] = [
     description:
       "NSCA-CPT資格保有トレーナーによる完全個別指導。運動が苦手な方でも安心して始められる、あなた専用のプログラムを作成します。食事指導も含めた総合的なサポートで、理想の身体づくりを実現。横手市で本格的なパーソナルトレーニングを。",
     button: "パーソナルの詳細を見る",
-    titleColor: "text-[#bf8f2f]",
-    lineColor: "bg-[#bf8f2f]",
+    titleColor: "text-green-700",
+    lineColor: "bg-green-700",
     icon: "personal",
-    topBg: "bg-gradient-to-r from-[#bf8f2f] via-[#ccb175] to-[#ded7c8]",
+    topBg: "bg-gradient-to-r from-green-700 via-green-500 to-[#c4d8c8]",
     buttonClass:
-      "border-[#bf8f2f] text-[#a67e2a] hover:bg-[#f8f1e2]",
+      "border-green-700 text-green-700 hover:bg-green-50",
   },
   {
     key: "coaching",
@@ -106,20 +106,22 @@ function ServiceIcon({ icon }: { icon: ServiceCard["icon"] }) {
 
 export default function Services() {
   return (
-    <section id="services" className="bg-[#f3f4f3] py-20 md:py-24">
+    <section id="services" className="bg-white py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="mb-12 text-center md:mb-14">
-            <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[52px]">
-              あなたに合ったサービスをお選びください
+            <h2 className="font-serif text-3xl font-bold text-[#1f2937] md:text-[44px]">
+              なりたい理想の自分になるために
+              <br />
+              最適なサポートをご提案します
             </h2>
-            <p className="mx-auto mt-4 max-w-3xl whitespace-nowrap text-sm font-medium text-gray-500 md:text-xl">
-              VERDE FITでは、3つの専門サービスを通じて、あなたの健康目標達成をサポートします
+            <p className="mx-auto mt-4 max-w-3xl text-sm font-medium text-gray-500 md:text-base">
+              VERDE FIT では、3つの専門サービスを通じて、目標達成を支援。
             </p>
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 gap-0 overflow-hidden rounded-none md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {serviceCards.map((service, i) => (
             <FadeIn key={service.key} delay={i * 120}>
               <article className="flex h-full flex-col bg-white shadow-[0_8px_28px_rgba(0,0,0,0.04)]">

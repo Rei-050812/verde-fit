@@ -1,14 +1,13 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
-import Link from "next/link";
 
 const navLinks = [
   { href: "#services", label: "整体" },
   { href: "#personal", label: "パーソナル" },
   { href: "#coaching", label: "コーチング" },
   { href: "#pricing", label: "料金" },
-  { href: "#blog", label: "ブログ" },
+  { href: "#testimonials", label: "お客様の声" },
   { href: "#access", label: "アクセス" },
 ];
 
@@ -19,16 +18,21 @@ export default function Header() {
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-green-700 text-xs font-bold text-white">
-              VF
-            </span>
-            <span className="font-serif text-[28px] font-semibold leading-none text-[#1f2937]">
+          <a href="/" className="flex items-center gap-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.svg"
+              alt="VERDE FIT ロゴ"
+              width={40}
+              height={40}
+              className="h-10 w-10 object-contain rounded-full"
+            />
+            <span className="font-serif text-[22px] font-semibold leading-none text-[#1f2937]">
               VERDE FIT
             </span>
-          </Link>
+          </a>
 
-          <nav className="hidden items-center gap-8 lg:flex">
+          <nav className="hidden items-center gap-6 lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -40,7 +44,7 @@ export default function Header() {
             ))}
             <a
               href="tel:0000000000"
-              className="inline-flex items-center justify-center gap-1.5 rounded-md bg-green-700 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-800"
+              className="inline-flex items-center justify-center gap-1.5 rounded-md bg-green-700 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-800"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -61,9 +65,9 @@ export default function Header() {
             </a>
             <a
               href="#cta"
-              className="inline-flex items-center justify-center rounded-md bg-[#bf8f2f] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#ad8129]"
+              className="inline-flex items-center justify-center rounded-md bg-green-700 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-800"
             >
-              体験予約
+              予約はこちら
             </a>
           </nav>
 
@@ -124,10 +128,10 @@ export default function Header() {
             </a>
             <a
               href="#cta"
-              className="rounded-md bg-[#bf8f2f] px-5 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-[#ad8129]"
+              className="rounded-md bg-green-700 px-5 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-green-800"
               onClick={() => setIsOpen(false)}
             >
-              体験予約
+              予約はこちら
             </a>
           </nav>
         </div>

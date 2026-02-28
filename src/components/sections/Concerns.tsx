@@ -59,8 +59,8 @@ const concernCards: ConcernCard[] = [
   },
 ];
 
-function ConcernIcon({ icon, color }: { icon: ConcernCard["icon"]; color: ConcernCard["color"] }) {
-  const stroke = color === "green" ? "text-green-700" : "text-[#bf8f2f]";
+function ConcernIcon({ icon }: { icon: ConcernCard["icon"] }) {
+  const stroke = "text-green-700";
 
   if (icon === "decline") {
     return (
@@ -119,8 +119,8 @@ function ConcernIcon({ icon, color }: { icon: ConcernCard["icon"]; color: Concer
 
 export default function Concerns() {
   return (
-    <section className="bg-[#f3f4f3] py-20 md:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#e8f3ec] pt-20 md:pt-24">
+      <div className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8 md:pb-24">
         <FadeIn>
           <div className="mb-10 text-center md:mb-12">
             <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[52px]">こんなお悩み、ありませんか？</h2>
@@ -134,12 +134,8 @@ export default function Concerns() {
           {concernCards.map((concern, i) => (
             <FadeIn key={concern.key} delay={i * 90}>
               <article className="flex h-full min-h-[290px] flex-col rounded-2xl border border-gray-100 bg-white p-7 shadow-[0_6px_20px_rgba(0,0,0,0.03)]">
-                <span
-                  className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full ${
-                    concern.color === "green" ? "bg-green-100/75" : "bg-amber-100/75"
-                  }`}
-                >
-                  <ConcernIcon icon={concern.icon} color={concern.color} />
+                <span className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-green-100/75">
+                  <ConcernIcon icon={concern.icon} />
                 </span>
                 <h3 className="mb-3 whitespace-nowrap text-[18px] font-bold leading-tight text-[#1f2937] lg:text-[20px]">
                   {concern.title}
@@ -149,15 +145,21 @@ export default function Concerns() {
             </FadeIn>
           ))}
         </div>
+      </div>
 
-        <FadeIn delay={120}>
-          <div className="mt-10 rounded-xl bg-green-700 px-8 py-12 text-center shadow-[0_12px_30px_rgba(16,87,35,0.25)] md:px-14 md:py-14">
-            <h3 className="font-serif text-4xl font-bold text-white md:text-[44px]">これらの悩みの根本原因は？</h3>
-            <p className="mx-auto mt-6 max-w-6xl text-[14px] leading-[1.9] text-white md:text-[16px]">
-              多くの不調は、身体の使い方の偏り、筋力の低下、そして習慣化されていない健康行動が原因です。VERDE FITでは、整体で身体を整え、トレーニングで動ける身体をつくり、コーチングで継続できる習慣を確立。この3つのアプローチで、根本からの改善を実現します。
-            </p>
-          </div>
-        </FadeIn>
+      <div className="bg-white py-14 md:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <FadeIn delay={120}>
+            <div className="text-center">
+              <h3 className="font-serif text-3xl font-bold text-[#1f2937] md:text-[40px]">これらの悩みの根本原因は？</h3>
+              <div className="mt-8 rounded-xl border-2 border-green-700 bg-white px-8 py-8 md:px-20 md:py-10">
+                <p className="text-[14px] leading-[2] text-gray-700 md:text-[15px]">
+                  多くの不調は年齢や体力の低下だけが原因ではありません。姿勢の癖や身体の使い方、生活習慣の積み重ねによって特定の部位に負担が集中することで起こります。VERDE FITでは、整体で身体を整え、トレーニングで動ける身体をつくり、コーチングで継続できる習慣を確立。この３つのアプローチで、根本からの改善を実現します。
+                </p>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
       </div>
     </section>
   );

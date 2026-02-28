@@ -1,96 +1,112 @@
-﻿import FadeIn from "@/components/FadeIn";
+import FadeIn from "@/components/FadeIn";
 
 type Voice = {
-  initial: string;
-  name: string;
+  goal: string;
   demographics: string;
-  before: string;
-  after: string;
-  hasVisual: boolean;
+  result: string;
 };
 
 const voices: Voice[] = [
   {
-    initial: "A",
-    name: "A.Kさん",
-    demographics: "40代女性",
-    before: "デスクワークで肩こり・頭痛が慢性化",
-    after: "3ヶ月で痛みがほぼ消失。姿勢も改善されました",
-    hasVisual: false,
+    goal: "健康維持増進とボディメイク目的",
+    demographics: "30代女性",
+    result: "4ヶ月のトレーニングでウエストと\n下半身が引き締まり、\n姿勢と日ごろの効果を実感",
   },
   {
-    initial: "S",
-    name: "S.Kさん",
-    demographics: "30代男性",
-    before: "運動不足で体重増加、疲れやすい",
-    after: "2ヶ月で-5kg達成。体力もアップしました",
-    hasVisual: true,
+    goal: "ダイエット目的",
+    demographics: "30代女性",
+    result: "6ヶ月で10kg減量\nトレーニングも無理なく継続中",
   },
   {
-    initial: "T",
-    name: "T.Aさん",
+    goal: "ダイエット目的",
+    demographics: "60代女性",
+    result: "3ヶ月で10kg減量\n週3回のトレーニングと食事管理で継続中",
+  },
+  {
+    goal: "ボディメイク目的",
     demographics: "50代女性",
-    before: "ダイエットが続かず、何度も挫折",
-    after: "コーチングで習慣が変わり、今も継続中",
-    hasVisual: true,
+    result: "フォーム修正で効果が向上し\n見た目にも変化を実感",
+  },
+  {
+    goal: "右肩を上げると肩が痛む",
+    demographics: "60代女性",
+    result: "原因にアプローチし\n短時間で効果を実感",
+  },
+  {
+    goal: "O脚で膝が痛い",
+    demographics: "40代女性",
+    result: "長年痛めていた痛み\n1回でここまで改善",
   },
 ];
 
+function PersonIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      className="h-16 w-16 text-green-600"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="8" r="3.5" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7" />
+    </svg>
+  );
+}
+
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="bg-[#f3f4f3] py-20 md:py-24">
+    <section id="testimonials" className="bg-white py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
-          <div className="mb-14 text-center">
-            <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[52px]">お客様の声</h2>
+          <div className="mb-12 text-center">
+            <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[48px]">お客様の声</h2>
+            <p className="mx-auto mt-4 text-sm text-gray-500 md:text-base">
+              実際に改善を実感されたお客様の声をご紹介します
+            </p>
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {voices.map((v, i) => (
-            <FadeIn key={v.name} delay={i * 90}>
-              <article className="flex h-full min-h-[620px] flex-col rounded-2xl border border-gray-200 bg-white px-7 pb-7 pt-8 shadow-[0_10px_24px_rgba(0,0,0,0.03)]">
-                <div className="mb-5 flex items-center gap-4">
-                  <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-green-700 text-3xl font-bold text-white">
-                    {v.initial}
-                  </span>
-                  <div>
-                    <p className="text-2xl font-bold leading-tight text-[#1f2937]">{v.name}</p>
-                    <p className="mt-1 text-xl font-medium text-gray-500">{v.demographics}</p>
+            <FadeIn key={i} delay={i * 80}>
+              <article className="flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
+                {/* ヘッダー */}
+                <div className="bg-[#e8f2ec] px-5 py-4 text-center">
+                  <p className="text-[15px] font-bold text-[#1f2937]">{v.goal}</p>
+                  <p className="mt-1 text-sm text-gray-500">{v.demographics}</p>
+                </div>
+
+                {/* 画像エリア */}
+                <div className="flex flex-col items-center px-6 pt-5 pb-2">
+                  <p className="mb-1 text-[11px] text-gray-400">※写真はイメージです</p>
+                  <p className="mb-4 text-[12px] text-gray-500">定期的な利用者で生まれる実感</p>
+
+                  <div className="flex h-36 w-36 items-center justify-center rounded-full bg-gray-200">
+                    <PersonIcon />
                   </div>
                 </div>
 
-                <div className="space-y-3 border-b border-gray-200 pb-6">
-                  <p className="inline-flex max-w-full items-center overflow-hidden text-ellipsis whitespace-nowrap rounded-full bg-rose-50 px-3 py-1 text-[13px] font-semibold text-rose-400">
-                    Before: {v.before}
+                {/* 結果テキスト */}
+                <div className="px-5 py-5 text-center">
+                  <p className="text-[15px] font-bold leading-7 text-[#1f2937] whitespace-pre-line">
+                    {v.result}
                   </p>
-                  <p className="inline-flex max-w-full items-center overflow-hidden text-ellipsis whitespace-nowrap rounded-full bg-emerald-50 px-3 py-1 text-[13px] font-semibold text-green-700">
-                    After: {v.after}
-                  </p>
-                </div>
-
-                <div className="pt-6">
-                  <p className="text-2xl font-medium text-gray-500">Comment</p>
-                </div>
-
-                <div className="mt-6 flex-1">
-                  {v.hasVisual ? (
-                    <div className="flex h-full min-h-[290px] items-center justify-center rounded-2xl bg-gradient-to-r from-[#efebe2] to-[#e7efe7]">
-                      <img src="/hero-placeholder.jpg" alt="お客様イメージ" className="h-28 w-28 object-contain opacity-45" />
-                    </div>
-                  ) : (
-                    <div className="h-full min-h-[290px]" />
-                  )}
                 </div>
               </article>
             </FadeIn>
           ))}
         </div>
 
-        <FadeIn>
-          <div className="mt-10">
-            <a href="#" className="inline-flex items-center gap-2 text-xl font-semibold text-green-700 hover:text-green-800">
-              もっと見る
+        <FadeIn delay={100}>
+          <div className="mt-10 text-center">
+            <a
+              href="#"
+              className="inline-flex items-center gap-2 rounded-lg bg-green-700 px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-800"
+            >
+              お客様の声一覧へ
               <span aria-hidden="true">→</span>
             </a>
           </div>

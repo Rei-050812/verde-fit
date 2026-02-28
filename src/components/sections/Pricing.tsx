@@ -1,11 +1,4 @@
-﻿import FadeIn from "@/components/FadeIn";
-
-const regularPricing = [
-  { name: "整体コース", duration: "(60分)", price: "¥8,800〜" },
-  { name: "パーソナルトレーニング", duration: "(60分)", price: "¥9,900〜" },
-  { name: "コーチングセッション", duration: "(90分)", price: "¥11,000〜" },
-  { name: "回数券プラン", duration: "", price: "割引価格" },
-];
+import FadeIn from "@/components/FadeIn";
 
 const trialBenefits = [
   "丁寧なカウンセリングで、あなたの悩みをヒアリング",
@@ -13,74 +6,192 @@ const trialBenefits = [
   "あなたに最適なプランをご提案",
 ];
 
+const pricingColumns = [
+  {
+    title: "整体コース",
+    items: [
+      { label: "30分整体", price: "¥4,400" },
+      { label: "60分整体", price: "¥8,800" },
+      { label: "120分整体", price: "¥13,200" },
+    ],
+  },
+  {
+    title: "パーソナルトレーニング",
+    items: [
+      { label: "24回ダイエットプラン", price: "¥198,000" },
+      { label: "1ヶ月/8回 食事指導なし", price: "¥56,000" },
+      { label: "1ヶ月/4回 食事指導なし", price: "¥32,000" },
+    ],
+  },
+  {
+    title: "コーチング",
+    items: [
+      { label: "1ヶ月/4回 オンライン60分", price: "¥28,000" },
+      { label: "1ヶ月/4回 対面60分", price: "¥30,000" },
+      { label: "対面60分", price: "¥8,800" },
+    ],
+  },
+];
+
 export default function Pricing() {
   return (
-    <section id="pricing" className="bg-green-800 py-20 md:py-24">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <section id="pricing" className="bg-white py-20 md:py-24">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
-          <div className="mb-8 text-center md:mb-10">
-            <h2 className="font-serif text-4xl font-bold text-white md:text-[52px]">料金案内</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-sm font-medium text-green-100 md:text-xl">
+          <div className="mb-10 text-center md:mb-12">
+            <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[52px]">料金案内</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm font-medium text-gray-500 md:text-base">
               明瞭な料金体系で、安心してご利用いただけます
             </p>
           </div>
         </FadeIn>
 
+        {/* 初回体験コース */}
         <FadeIn>
-          <div className="mx-auto mb-6 max-w-xl rounded-xl bg-white px-8 py-8 shadow-[0_10px_30px_rgba(0,0,0,0.15)] md:px-10 md:py-10">
+          <div className="mx-auto mb-6 max-w-xl rounded-xl bg-white px-8 py-8 shadow-[0_10px_30px_rgba(0,0,0,0.08)] md:px-10 md:py-10">
             <div className="text-center">
-              <span className="inline-block rounded-full bg-[#bf8f2f] px-4 py-1 text-[12px] font-semibold text-white md:text-[13px]">
+              <span className="inline-block rounded-full bg-green-700 px-4 py-1 text-[12px] font-semibold text-white md:text-[13px]">
                 OPEN記念 特別価格
               </span>
-              <h3 className="mt-5 font-serif text-[34px] font-bold text-[#1f2937] md:text-[44px]">初回体験コース</h3>
+              <h3 className="mt-5 font-serif text-[30px] font-bold text-[#1f2937] md:text-[38px]">初回体験コース</h3>
 
               <div className="mt-3 flex items-end justify-center gap-2">
-                <span className="font-serif text-5xl font-bold text-green-700 md:text-[64px]">¥3,300</span>
+                <span className="font-serif text-5xl font-bold text-green-700 md:text-[60px]">¥5,500</span>
                 <span className="pb-2 text-sm font-medium text-gray-500 md:text-base">(税込)</span>
               </div>
 
-              <p className="mt-3 text-lg font-semibold text-[#1f2937] md:text-xl">カウンセリング + 整体 or トレーニング</p>
-              <p className="mt-1 text-sm text-gray-500 md:text-base">所要時間：60分</p>
+              <p className="mt-3 text-base font-semibold text-[#1f2937]">カウンセリング30分 + 整体・パーソナルトレーニング60分</p>
+              <p className="mt-1 text-sm text-gray-500">所要時間：90分</p>
 
-              <ul className="mx-auto mt-6 max-w-[460px] space-y-2.5 text-left">
+              <a
+                href="#cta"
+                className="mt-6 inline-flex h-11 items-center justify-center rounded-md bg-green-700 px-10 text-sm font-semibold text-white transition-colors hover:bg-green-800 md:h-12"
+              >
+                予約はこちら
+              </a>
+
+              <ul className="mx-auto mt-6 max-w-[400px] space-y-2 text-left">
                 {trialBenefits.map((b) => (
-                  <li key={b} className="flex items-start gap-2.5 text-sm text-gray-700 md:text-[15px]">
-                    <span className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-[#bf8f2f] text-[10px] font-bold text-[#bf8f2f]">
+                  <li key={b} className="flex items-start gap-2.5 text-sm text-gray-700">
+                    <span className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-green-700 text-[10px] font-bold text-green-700">
                       ✓
                     </span>
                     <span>{b}</span>
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+        </FadeIn>
 
+        {/* 通常料金 */}
+        <FadeIn delay={100}>
+          <div className="mb-6 rounded-xl bg-white px-8 py-8 shadow-[0_10px_30px_rgba(0,0,0,0.06)] md:px-10 md:py-10">
+            <h3 className="mb-6 text-center font-serif text-2xl font-bold text-[#1f2937] md:text-[32px]">通常料金</h3>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              {pricingColumns.map((col) => (
+                <div key={col.title}>
+                  <h4 className="mb-3 text-sm font-bold text-green-700 md:text-base">{col.title}</h4>
+                  <div className="space-y-2">
+                    {col.items.map((item) => (
+                      <div key={item.label} className="flex items-center justify-between border-b border-gray-100 pb-2">
+                        <p className="text-xs text-gray-600 md:text-[13px]">{item.label}</p>
+                        <p className="text-sm font-bold text-green-700 md:text-base">{item.price}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-6 text-center text-xs text-gray-500">※すべて税込価格です。回数券プランもございます。</p>
+
+            <div className="mt-6 text-center">
               <a
-                href="#cta"
-                className="mt-7 inline-flex h-11 items-center justify-center rounded-md bg-[#bf8f2f] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#ad8129] md:h-12 md:text-[15px]"
+                href="#"
+                className="inline-flex items-center gap-1.5 rounded-md bg-green-700 px-7 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-800"
               >
-                体験予約はこちら
+                料金詳細はこちら
+                <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
         </FadeIn>
 
-        <FadeIn delay={120}>
-          <div className="mx-auto max-w-xl rounded-xl bg-white px-8 py-7 shadow-[0_10px_30px_rgba(0,0,0,0.12)] md:px-10 md:py-9">
-            <h3 className="text-center font-serif text-3xl font-bold text-[#1f2937] md:text-[40px]">通常料金</h3>
-            <p className="mt-2 text-center text-xs text-gray-500 md:text-sm">※詳細は体験時にご案内します</p>
+        {/* キャンセルポリシー */}
+        <FadeIn delay={150}>
+          <div className="rounded-xl bg-white px-8 py-8 shadow-[0_10px_30px_rgba(0,0,0,0.06)] md:px-10 md:py-10">
+            <h3 className="mb-6 text-center font-serif text-2xl font-bold text-[#1f2937] md:text-[32px]">キャンセルポリシー</h3>
 
-            <div className="mt-5 space-y-3">
-              {regularPricing.map((plan) => (
-                <div key={plan.name} className="flex items-center justify-between text-sm md:text-[15px]">
-                  <p className="font-medium text-gray-700">
-                    {plan.name}
-                    {plan.duration && <span className="ml-1 text-gray-500">{plan.duration}</span>}
-                  </p>
-                  <p className="font-bold text-green-700">{plan.price}</p>
+            <div className="rounded-lg border border-gray-200 px-6 py-7 text-sm leading-7 text-gray-700 md:px-10 md:py-8">
+              {/* ヘッダー */}
+              <div className="mb-6 text-center">
+                <p className="inline-flex items-center gap-2 text-lg font-bold text-[#1f2937]">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="h-6 w-6 text-green-700" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4M12 16h.01" />
+                  </svg>
+                  大切なお知らせ
+                </p>
+                <p className="mt-3 text-[13px] leading-7 text-gray-600">
+                  VERDE FITでは、お一人おひとりに十分なお時間を確保した完全予約制でご案内しております。<br />
+                  すべてのお客様に気持ちよくご利用いただくため、下記のルールにご理解とご協力をお願いいたします。
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                {/* キャンセル・変更 */}
+                <div>
+                  <p className="mb-2 text-center font-bold text-[#1f2937]">■ キャンセル・変更について</p>
+                  <p className="text-center text-[13px] leading-6 text-gray-600">ご予約の変更・キャンセルは、できるだけお早めにご連絡ください。</p>
+                  <ul className="mt-3 space-y-1.5 text-center text-[13px] leading-6">
+                    <li>・2日前までのご連絡：<span className="font-semibold">無料で変更可能</span></li>
+                    <li>・前日のキャンセル：<span className="font-semibold">ご利用料金の50%</span></li>
+                    <li>・当日キャンセル：<span className="font-semibold">ご利用料金の100%</span></li>
+                  </ul>
+                  <div className="mt-3 space-y-1 text-center text-[12px] text-gray-500">
+                    <p>※前日までにご連絡をいただいた場合、1回のみ振替対応が可能です。</p>
+                    <p>※振替は同月内でのご利用をお願いしております。</p>
+                  </div>
                 </div>
-              ))}
-            </div>
 
-            <p className="mt-6 text-center text-xs text-gray-500 md:text-sm">※すべて税込価格です</p>
+                {/* 無断キャンセル */}
+                <div>
+                  <p className="mb-2 text-center font-bold text-[#1f2937]">■ 無断キャンセルについて</p>
+                  <p className="text-center text-[13px] leading-7 text-gray-600">
+                    ご連絡のないキャンセルは「1回分消化」とさせていただきます。<br />
+                    また、無断キャンセルや直前のキャンセル・変更が続く場合は、今後のご予約方法やご契約内容の見直しをお願いする場合がございます。
+                  </p>
+                </div>
+
+                {/* 遅刻 */}
+                <div>
+                  <p className="mb-2 text-center font-bold text-[#1f2937]">■ 遅刻について</p>
+                  <p className="text-center text-[13px] leading-7 text-gray-600">
+                    ご予約時間に遅れてご来店された場合、次のお客様の関係上、セッション時間を短縮させていただくことがございます。<br />
+                    なお、ご連絡なく10分以上遅れた場合はキャンセル扱いとなる場合がございます。
+                  </p>
+                </div>
+
+                {/* 体調不良 */}
+                <div>
+                  <p className="mb-2 text-center font-bold text-[#1f2937]">■ 体調不良・やむを得ない事情の場合</p>
+                  <p className="text-center text-[13px] leading-7 text-gray-600">
+                    体調不良や急なご事情の際は、無理をなさらずお早めにご連絡ください。<br />
+                    医師の診断書の提出など客観的にやむを得ない理由が確認できる場合は、個別に対応させていただきます。<br />
+                    なお、「悪天候」「気分」「他のご予定」などの理由によるキャンセルは通常のキャンセル規定の対象となります。
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 text-center">
+                <p className="text-[13px] font-medium text-gray-600">
+                  皆さまが安心して通っていただける環境づくりのため、何卒ご理解のほどよろしくお願いいたします。
+                </p>
+                <p className="mt-3 text-[13px] font-bold text-green-700">VERDE FIT</p>
+              </div>
+            </div>
           </div>
         </FadeIn>
       </div>

@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --primary: #2D7A3E;
-  --primary-light: #3A9A50;
-  --primary-dark: #1F5A2B;
+  --primary: #4aaa68;
+  --primary-light: #5abb79;
+  --primary-dark: #3a9257;
   --bg-secondary: #F8FAF9;
   --text-main: #1A1A1A;
   --text-sub: #4A5568;
@@ -18,6 +18,18 @@
   --color-text-sub: var(--text-sub);
   --font-sans: var(--font-noto-sans-jp);
   --font-serif: var(--font-noto-serif-jp);
+
+  /* green scale override — lighter/brighter */
+  --color-green-50:  #edf8f1;
+  --color-green-100: #d2f0dc;
+  --color-green-200: #a8e0bc;
+  --color-green-300: #79ce9a;
+  --color-green-400: #55bf7d;
+  --color-green-500: #3daa68;
+  --color-green-600: #3aA05e;
+  --color-green-700: #4aaa68;
+  --color-green-800: #3a9257;
+  --color-green-900: #2a7040;
 }
 
 body {

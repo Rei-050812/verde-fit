@@ -2,7 +2,7 @@
 
 export default function Access() {
   return (
-    <section id="access" className="bg-[#f3f4f3] py-20 md:py-24">
+    <section id="access" className="bg-[#e8f3ec] py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="mb-12 text-center md:mb-14">
@@ -16,7 +16,7 @@ export default function Access() {
         <div className="grid items-start gap-10 md:grid-cols-[1fr_1.08fr] md:gap-12">
           <FadeIn>
             <div>
-              <p className="text-sm font-semibold text-[#bf8f2f] md:text-base">店舗名</p>
+              <p className="text-sm font-semibold text-green-700 md:text-base">店舗名</p>
               <h3 className="mt-2 whitespace-nowrap font-serif text-[34px] font-bold leading-tight text-[#1f2937] md:text-[44px]">
                 VERDE FIT（ヴェルデフィット）
               </h3>
@@ -72,17 +72,18 @@ export default function Access() {
                     </span>
                     定休日
                   </p>
-                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">毎週木曜日</p>
-                  <p className="text-sm leading-7 text-gray-600 md:text-base">※不定休あり（事前にお知らせします）</p>
+                  <p className="mt-1 text-sm leading-7 text-gray-600 md:text-base">不定休</p>
+                  <p className="text-sm leading-7 text-gray-600 md:text-base">※SNS等で事前にお知らせ</p>
                 </div>
 
                 <div>
                   <p className="flex items-center gap-2 text-lg font-bold text-[#1f2937] md:text-xl">
                     <span className="inline-flex h-5 w-5 items-center justify-center text-green-700" aria-hidden="true">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" className="h-5 w-5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 14h13l4 4v-4h1V6a2 2 0 0 0-2-2H3z" />
-                        <circle cx="7" cy="14" r="1.4" />
-                        <circle cx="16" cy="14" r="1.4" />
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                        <path d="M5 15H3V11L5 7H19L21 11V15H19" />
+                        <path d="M8 15h8" />
+                        <circle cx="6" cy="17" r="2" />
+                        <circle cx="18" cy="17" r="2" />
                       </svg>
                     </span>
                     駐車場
