@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${notoSansJP.variable} ${notoSerifJP.variable} antialiased`}
+        className={`${notoSansJP.variable} ${notoSerifJP.variable} antialiased overflow-x-hidden`}
       >
         {children}
       </body>

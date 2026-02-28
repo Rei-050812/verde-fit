@@ -56,12 +56,12 @@ function ReasonVisual({
 }) {
   return (
     <div
-      className={`aspect-square w-full max-w-[340px] ${
+      className={`aspect-square w-full max-w-[340px] mx-auto ${
         align === "start"
-          ? "justify-self-start"
+          ? "md:justify-self-start md:mx-0"
           : align === "end"
-          ? "justify-self-end"
-          : "justify-self-center"
+          ? "md:justify-self-end md:mx-0"
+          : "md:justify-self-center"
       } overflow-hidden rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.08)]`}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}

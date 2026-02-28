@@ -26,9 +26,9 @@ export default function Hero({ data }: { data?: HeroData | null }) {
 
   return (
     <section className="relative overflow-hidden bg-[#e8f3ec]">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
-          <div className="min-w-0">
+      <div className="mx-auto max-w-7xl px-4 pt-24 pb-12 sm:px-6 sm:pt-28 sm:pb-16 lg:px-10 lg:py-24">
+        <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
+          <div className="min-w-0 order-2 lg:order-1">
             <FadeIn>
               <span className="mb-6 inline-block rounded-full bg-green-700 px-5 py-1.5 text-sm font-semibold tracking-wide text-white">
                 {badge}
@@ -73,8 +73,11 @@ export default function Hero({ data }: { data?: HeroData | null }) {
             </FadeIn>
           </div>
 
-          <FadeIn delay={250}>
-            <div className="relative mx-auto overflow-hidden rounded-full" style={{ aspectRatio: "1/1" }}>
+          <FadeIn delay={250} className="order-1 lg:order-2">
+            <div
+              className="relative mx-auto w-full max-w-[220px] sm:max-w-[280px] lg:max-w-none overflow-hidden rounded-2xl lg:rounded-full"
+              style={{ aspectRatio: "1/1" }}
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={imageUrl}

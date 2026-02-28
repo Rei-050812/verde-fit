@@ -99,7 +99,7 @@ export default async function MainLayout({
   return (
     <>
       <Header phone={phone} />
-      <main>{children}</main>
+      <main className="pb-14 lg:pb-0">{children}</main>
       <Footer
         phone={phone}
         instagramUrl={instagramUrl}
