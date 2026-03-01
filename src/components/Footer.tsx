@@ -5,6 +5,12 @@ type FooterProps = {
   lineUrl?: string;
   footerDescription?: string;
   copyrightYear?: string;
+  logoUrl?: string;
+  postalCode?: string;
+  address?: string;
+  hours?: string;
+  lastEntry?: string;
+  closedDays?: string;
 };
 
 const footerLinks = [
@@ -58,6 +64,12 @@ export default function Footer({
   lineUrl,
   footerDescription,
   copyrightYear,
+  logoUrl,
+  postalCode,
+  address,
+  hours,
+  lastEntry,
+  closedDays,
 }: FooterProps) {
   const telHref = phone ? `tel:${phone.replace(/-/g, "")}` : "#";
   const telDisplay = "お電話でのご相談";
@@ -65,6 +77,11 @@ export default function Footer({
   const description =
     footerDescription ??
     "横手市に誕生する、本格トータルケアサロン。整体・パーソナルトレーニング・コーチングで、あなたの健康を総合サポートします。";
+  const footerPostalCode = postalCode ?? "〒013-0061";
+  const footerAddress = address ?? "秋田県横手市横手町四ノ口125-1";
+  const footerHours = hours ? `営業時間: ${hours}` : "営業時間: 10:00〜21:00";
+  const footerLastEntry = lastEntry ?? "最終受付20:30";
+  const footerClosedDays = closedDays ? `定休日: ${closedDays}` : "定休日: 不定休";
 
   return (
     <footer className="bg-white border-t border-gray-100">
@@ -74,7 +91,7 @@ export default function Footer({
             <a href="/" className="mb-5 inline-flex items-center gap-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/logo.svg"
+                src={logoUrl ?? "/logo.svg"}
                 alt="VERDE FIT ロゴ"
                 width={36}
                 height={36}
@@ -88,10 +105,10 @@ export default function Footer({
             </p>
 
             <div className="mt-5 space-y-1.5 text-sm text-gray-600">
-              <p>〒013-0061</p>
-              <p>秋田県横手市横手町四ノ口125-1</p>
-              <p>営業時間: 10:00〜21:00（最終受付20:30）</p>
-              <p>定休日: 毎週木曜日、不定休</p>
+              <p>{footerPostalCode}</p>
+              <p>{footerAddress}</p>
+              <p>{footerHours}（{footerLastEntry}）</p>
+              <p>{footerClosedDays}</p>
             </div>
 
             <a

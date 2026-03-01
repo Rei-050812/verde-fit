@@ -17,6 +17,14 @@ type SiteSettingsSanity = {
   favicon?: { asset: { _ref: string; _type: string } };
 };
 
+type AccessPartialSanity = {
+  postalCode?: string;
+  address?: string;
+  hours?: string;
+  lastEntry?: string;
+  closedDays?: string;
+};
+
 type TopPageSeoSanity = {
   pageTitle?: string;
   metaDescription?: string;
@@ -87,9 +95,14 @@ export default async function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const settings = await safeFetch<SiteSettingsSanity>(
-    `*[_type == "siteSettings"][0]{ phone, instagramUrl, facebookUrl, lineUrl, footerDescription, copyrightYear, logo{ asset{ _ref, _type } }, favicon{ asset{ _ref, _type } } }`
-  );
+  const [settings, access] = await Promise.all([
+    safeFetch<SiteSettingsSanity>(
+      `*[_type == "siteSettings"][0]{ phone, instagramUrl, facebookUrl, lineUrl, footerDescription, copyrightYear, logo{ asset{ _ref, _type } }, favicon{ asset{ _ref, _type } } }`
+    ),
+    safeFetch<AccessPartialSanity>(
+      `*[_type == "access"][0]{ postalCode, address, hours, lastEntry, closedDays }`
+    ),
+  ]);
 
   const phone = settings?.phone ?? undefined;
   const instagramUrl = settings?.instagramUrl ?? undefined;
@@ -110,6 +123,12 @@ export default async function MainLayout({
         lineUrl={lineUrl}
         footerDescription={footerDescription}
         copyrightYear={copyrightYear}
+        logoUrl={logoUrl}
+        postalCode={access?.postalCode}
+        address={access?.address}
+        hours={access?.hours}
+        lastEntry={access?.lastEntry}
+        closedDays={access?.closedDays}
       />
       <FloatingButtons phone={phone} />
     </MenuProvider>
