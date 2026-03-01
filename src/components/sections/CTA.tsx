@@ -7,7 +7,7 @@ type CTAData = {
   secondaryButtonText?: string | null;
 };
 
-export default function CTA({ data }: { data?: CTAData | null }) {
+export default function CTA({ data, phone }: { data?: CTAData | null; phone?: string }) {
   const heading = data?.heading ?? "身体を変える一歩を、今日から。";
   const description =
     data?.description ??
@@ -36,7 +36,7 @@ export default function CTA({ data }: { data?: CTAData | null }) {
                 {primaryButtonText}
               </a>
               <a
-                href="tel:0000000000"
+                href={phone ? `tel:${phone.replace(/-/g, "")}` : "#"}
                 className="inline-flex h-14 min-w-[240px] items-center justify-center rounded-lg border-2 border-green-700 bg-white px-10 text-base font-semibold text-green-700 transition-colors hover:bg-green-50"
               >
                 {secondaryButtonText}

@@ -168,6 +168,7 @@ export default async function Home() {
     faqData,
     accessData,
     ctaData,
+    siteSettings,
   ] = await Promise.all([
     safeFetch<HeroRaw>(
       `*[_type == "hero"][0]{ ..., image{ asset{ _ref, _type } } }`
@@ -189,6 +190,7 @@ export default async function Home() {
     safeFetch<FAQSanity>(`*[_type == "faqSection"][0]`),
     safeFetch<AccessSanity>(`*[_type == "access"][0]`),
     safeFetch<CTASanity>(`*[_type == "cta"][0]`),
+    safeFetch<{ phone?: string }>(`*[_type == "siteSettings"][0]{ phone }`),
   ]);
 
   // Transform: resolve image URLs
@@ -230,9 +232,11 @@ export default async function Home() {
     ? { ...profileRaw, imageUrl: imgUrl(profileRaw.image) }
     : null;
 
+  const phone = siteSettings?.phone ?? undefined;
+
   return (
     <>
-      <Hero data={heroData} />
+      <Hero data={heroData} phone={phone} />
       <Services data={servicesData} />
       <Concerns data={concernsData} />
       <Reasons data={reasonsData} />
@@ -241,7 +245,7 @@ export default async function Home() {
       <Pricing data={pricingData} />
       <FAQ data={faqData} />
       <Access data={accessData} />
-      <CTA data={ctaData} />
+      <CTA data={ctaData} phone={phone} />
     </>
   );
 }

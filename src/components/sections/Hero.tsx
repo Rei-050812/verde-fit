@@ -11,7 +11,7 @@ type HeroData = {
   secondaryButtonText?: string | null;
 };
 
-export default function Hero({ data }: { data?: HeroData | null }) {
+export default function Hero({ data, phone }: { data?: HeroData | null; phone?: string }) {
   const badge = data?.badge ?? "2026年春 GRAND OPEN";
   const heading = data?.heading ?? "年齢に左右されない理想の身体へ。";
   const subheadingLocation =
@@ -64,7 +64,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
                   {primaryButtonText}
                 </a>
                 <a
-                  href="tel:0000000000"
+                  href={phone ? `tel:${phone.replace(/-/g, "")}` : "#"}
                   className="inline-flex items-center justify-center rounded-lg border-2 border-green-700 bg-white px-9 py-3.5 text-base font-semibold text-green-700 transition-colors hover:bg-green-50"
                 >
                   {secondaryButtonText}
