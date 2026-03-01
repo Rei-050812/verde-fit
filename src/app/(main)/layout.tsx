@@ -13,6 +13,7 @@ type SiteSettingsSanity = {
   lineUrl?: string;
   footerDescription?: string;
   copyrightYear?: string;
+  logo?: { asset: { _ref: string; _type: string } };
   favicon?: { asset: { _ref: string; _type: string } };
 };
 
@@ -87,7 +88,7 @@ export default async function MainLayout({
   children: React.ReactNode;
 }) {
   const settings = await safeFetch<SiteSettingsSanity>(
-    `*[_type == "siteSettings"][0]{ phone, instagramUrl, facebookUrl, lineUrl, footerDescription, copyrightYear, favicon{ asset{ _ref, _type } } }`
+    `*[_type == "siteSettings"][0]{ phone, instagramUrl, facebookUrl, lineUrl, footerDescription, copyrightYear, logo{ asset{ _ref, _type } }, favicon{ asset{ _ref, _type } } }`
   );
 
   const phone = settings?.phone ?? undefined;
@@ -96,10 +97,11 @@ export default async function MainLayout({
   const lineUrl = settings?.lineUrl ?? undefined;
   const footerDescription = settings?.footerDescription ?? undefined;
   const copyrightYear = settings?.copyrightYear ?? undefined;
+  const logoUrl = settings?.logo ? urlForImage(settings.logo) : undefined;
 
   return (
     <MenuProvider>
-      <Header phone={phone} />
+      <Header phone={phone} logoUrl={logoUrl} />
       <main>{children}</main>
       <Footer
         phone={phone}

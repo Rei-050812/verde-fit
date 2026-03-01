@@ -13,9 +13,10 @@ const navLinks = [
 
 type HeaderProps = {
   phone?: string;
+  logoUrl?: string;
 };
 
-export default function Header({ phone }: HeaderProps) {
+export default function Header({ phone, logoUrl }: HeaderProps) {
   const { isMenuOpen: isOpen, setIsMenuOpen: setIsOpen } = useMenu();
   const telHref = phone ? `tel:${phone.replace(/-/g, "")}` : "#";
 
@@ -23,18 +24,15 @@ export default function Header({ phone }: HeaderProps) {
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <a href="/" className="flex items-center gap-2">
+          <a href="/" className="flex items-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logo.svg"
+              src={logoUrl ?? "/logo.svg"}
               alt="VERDE FIT ロゴ"
               width={40}
               height={40}
               className="h-10 w-10 object-contain rounded-full"
             />
-            <span className="font-serif text-[22px] font-semibold leading-none text-[#1f2937]">
-              VERDE FIT
-            </span>
           </a>
 
           <nav className="hidden items-center gap-6 lg:flex">

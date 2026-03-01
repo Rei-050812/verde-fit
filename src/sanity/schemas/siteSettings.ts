@@ -28,6 +28,13 @@ export const siteSettingsSchema = defineType({
       description: "例: 2026",
     }),
     defineField({
+      name: "logo",
+      title: "ヘッダーロゴ",
+      type: "image",
+      description: "ヘッダーに表示されるロゴ画像（推奨: 正方形）",
+      options: { hotspot: false },
+    }),
+    defineField({
       name: "favicon",
       title: "ファビコン",
       type: "image",
