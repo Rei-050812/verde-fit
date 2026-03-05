@@ -17,6 +17,7 @@ type DisorderItem = {
 
 type DisordersData = {
   sectionTitle?: string | null;
+  sectionDescription?: string | null;
   items?: DisorderItem[] | null;
 };
 
@@ -61,6 +62,7 @@ const defaultItems: DisorderItem[] = [
 
 export default function SeitaiSymptoms({ data }: { data?: DisordersData | null }) {
   const sectionTitle = data?.sectionTitle ?? "放置すると起こりやすい不調の例";
+  const sectionDescription = data?.sectionDescription ?? null;
   const items =
     data?.items && data.items.length > 0 ? data.items : defaultItems;
 
@@ -72,6 +74,11 @@ export default function SeitaiSymptoms({ data }: { data?: DisordersData | null }
             <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[52px]">
               {sectionTitle}
             </h2>
+            {sectionDescription && (
+              <p className="mx-auto mt-4 max-w-3xl text-sm font-medium text-gray-500 md:text-xl">
+                {sectionDescription}
+              </p>
+            )}
           </div>
         </FadeIn>
 

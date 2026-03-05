@@ -432,7 +432,7 @@ const documents = [
     subheadingLocation: "横手市【整体・根本改善】",
     description:
       "延べ5,000人以上を治療してきた国家資格者が横手市であなたの痛みを根本から整えます。",
-    imageAlt: "整体施術のイメージ",
+    imageAlt: "痛みから解放されリビングで笑顔でストレッチする女性",
     primaryButtonText: "予約はこちら",
     secondaryButtonText: "お電話でのご相談",
   },
@@ -488,6 +488,7 @@ const documents = [
     _id: "chiropracticDisorders",
     _type: "chiropracticDisorders",
     sectionTitle: "放置すると起こりやすい不調の例",
+    sectionDescription: "痛みや不調をそのままにしていると、身体はさらに悪い状態へと向かいます",
     items: [
       {
         _key: "d1",
