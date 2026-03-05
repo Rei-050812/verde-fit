@@ -32,6 +32,13 @@ export const chiropracticDisordersSchema = defineType({
               type: "text",
               rows: 4,
             }),
+            defineField({
+              name: "icon",
+              title: "アイコン画像",
+              type: "image",
+              options: { hotspot: false },
+              description: "空欄の場合はデフォルトアイコンを使用",
+            }),
           ],
           preview: {
             select: { title: "title" },
@@ -53,6 +60,6 @@ export const chiropracticDisordersSchema = defineType({
     }),
   ],
   preview: {
-    prepare: () => ({ title: "不調の例（整体ページ）" }),
+    prepare: () => ({ title: "不調の例" }),
   },
 });

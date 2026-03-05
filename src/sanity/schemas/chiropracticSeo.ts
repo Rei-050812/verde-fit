@@ -46,6 +46,6 @@ export const chiropracticSeoSchema = defineType({
     }),
   ],
   preview: {
-    prepare: () => ({ title: "SEO設定（整体ページ）" }),
+    prepare: () => ({ title: "SEO設定" }),
   },
 });

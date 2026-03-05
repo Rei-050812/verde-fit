@@ -48,6 +48,6 @@ export const chiropracticProfileSchema = defineType({
     }),
   ],
   preview: {
-    prepare: () => ({ title: "代表プロフィール（整体ページ）" }),
+    prepare: () => ({ title: "代表プロフィール" }),
   },
 });

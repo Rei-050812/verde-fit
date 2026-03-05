@@ -13,6 +13,7 @@ type DisorderItem = {
   _key?: string;
   title?: string | null;
   description?: string | null;
+  imageUrl?: string | null;
 };
 
 type DisordersData = {
@@ -88,7 +89,7 @@ export default function SeitaiSymptoms({ data }: { data?: DisordersData | null }
               <article className="flex h-full flex-col rounded-2xl border border-gray-100 bg-white p-7 shadow-[0_6px_20px_rgba(0,0,0,0.05)]">
                 <span className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-full border-2 border-green-200 bg-white p-2">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={symptomIcons[i % symptomIcons.length]} alt="" className="h-full w-full object-contain" aria-hidden="true" />
+                  <img src={item.imageUrl ?? symptomIcons[i % symptomIcons.length]} alt="" className="h-full w-full object-contain" aria-hidden="true" />
                 </span>
                 <h3 className="mb-3 text-[17px] font-bold leading-snug text-[#1f2937] md:text-[18px]">
                   {item.title}

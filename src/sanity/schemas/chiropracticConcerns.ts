@@ -48,6 +48,6 @@ export const chiropracticConcernsSchema = defineType({
     }),
   ],
   preview: {
-    prepare: () => ({ title: "お悩み（整体ページ）" }),
+    prepare: () => ({ title: "お悩み" }),
   },
 });

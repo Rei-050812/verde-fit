@@ -49,6 +49,6 @@ export const chiropracticPricingSchema = defineType({
     defineField({ name: "pricingNote", title: "料金表の注記", type: "string" }),
   ],
   preview: {
-    prepare: () => ({ title: "料金案内（整体ページ）" }),
+    prepare: () => ({ title: "料金案内" }),
   },
 });

@@ -53,6 +53,6 @@ export const chiropracticHeroSchema = defineType({
     }),
   ],
   preview: {
-    prepare: () => ({ title: "ヒーロー（整体ページ）" }),
+    prepare: () => ({ title: "ヒーロー" }),
   },
 });

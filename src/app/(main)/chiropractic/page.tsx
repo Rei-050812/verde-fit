@@ -107,10 +107,11 @@ export default async function SeitaiPage() {
     concernList?: ConcernItem[];
   };
 
-  type DisorderItem = { _key: string; title?: string; description?: string };
+  type DisorderItemRaw = { _key: string; title?: string; description?: string; icon?: SanityImageRef };
   type DisordersRaw = {
     sectionTitle?: string;
-    items?: DisorderItem[];
+    sectionDescription?: string;
+    items?: DisorderItemRaw[];
     rootCauseTitle?: string;
     rootCauseText?: string;
   };
@@ -204,7 +205,9 @@ export default async function SeitaiPage() {
     safeFetch<ConcernsRaw>(
       `*[_type == "chiropracticConcerns"][0]{ ..., listImage{ asset{ _ref, _type } } }`
     ),
-    safeFetch<DisordersRaw>(`*[_type == "chiropracticDisorders"][0]`),
+    safeFetch<DisordersRaw>(
+      `*[_type == "chiropracticDisorders"][0]{ ..., items[]{ ..., icon{ asset{ _ref, _type } } } }`
+    ),
     safeFetch<ReasonsRaw>(
       `*[_type == "chiropracticReasons"][0]{ ..., reasonList[]{ ..., image{ asset{ _ref, _type } } } }`
     ),
@@ -243,6 +246,16 @@ export default async function SeitaiPage() {
     ? { ...profileRaw, imageUrl: imgUrl(profileRaw.image) }
     : null;
 
+  const disordersData = disordersRaw
+    ? {
+        ...disordersRaw,
+        items: disordersRaw.items?.map((item) => ({
+          ...item,
+          imageUrl: imgUrl(item.icon),
+        })),
+      }
+    : null;
+
   const phone = accessData?.phone ?? undefined;
 
   return (
@@ -255,7 +268,7 @@ export default async function SeitaiPage() {
         variant="list"
         listImageUrl={concernsData?.listImageUrl ?? "/chiropractic-concerns.png"}
       />
-      <SeitaiSymptoms data={disordersRaw} />
+      <SeitaiSymptoms data={disordersData} />
       <RootCause data={disordersRaw} />
       <Reasons data={reasonsData} sectionBg="bg-[#e8f3ec]" />
       <Profile data={profileData} sectionBg="bg-white" />

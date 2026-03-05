@@ -11,6 +11,6 @@ export const chiropracticCtaSchema = defineType({
     defineField({ name: "secondaryButtonText", title: "電話ボタンテキスト", type: "string" }),
   ],
   preview: {
-    prepare: () => ({ title: "CTA（整体ページ）" }),
+    prepare: () => ({ title: "CTA" }),
   },
 });

@@ -26,6 +26,6 @@ export const chiropracticFaqSchema = defineType({
     }),
   ],
   preview: {
-    prepare: () => ({ title: "よくある質問（整体ページ）" }),
+    prepare: () => ({ title: "よくある質問" }),
   },
 });

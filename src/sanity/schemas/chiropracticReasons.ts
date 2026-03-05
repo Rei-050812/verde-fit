@@ -42,6 +42,6 @@ export const chiropracticReasonsSchema = defineType({
     }),
   ],
   preview: {
-    prepare: () => ({ title: "選ばれる理由（整体ページ）" }),
+    prepare: () => ({ title: "選ばれる理由" }),
   },
 });
