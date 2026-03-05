@@ -70,7 +70,7 @@ const defaultPricingColumns: PricingColumn[] = [
   },
 ];
 
-export default function Pricing({ data }: { data?: PricingData | null }) {
+export default function Pricing({ data, sectionBg = "bg-white" }: { data?: PricingData | null; sectionBg?: string }) {
   const sectionTitle = data?.sectionTitle ?? "料金案内";
   const sectionDescription =
     data?.sectionDescription ?? "明瞭な料金体系で、安心してご利用いただけます";
@@ -131,7 +131,7 @@ export default function Pricing({ data }: { data?: PricingData | null }) {
     "皆さまが安心して通っていただける環境づくりのため、何卒ご理解のほどよろしくお願いいたします。";
 
   return (
-    <section id="pricing" className="bg-white py-20 md:py-24">
+    <section id="pricing" className={`${sectionBg} py-20 md:py-24`}>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="mb-10 text-center md:mb-12">
@@ -197,7 +197,7 @@ export default function Pricing({ data }: { data?: PricingData | null }) {
               通常料金
             </h3>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className={`grid grid-cols-1 gap-6 ${pricingColumns.length <= 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
               {pricingColumns.map((col) => (
                 <div key={col._key ?? col.title}>
                   <h4 className="mb-3 text-sm font-bold text-green-700 md:text-base">

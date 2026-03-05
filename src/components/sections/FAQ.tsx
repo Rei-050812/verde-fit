@@ -90,7 +90,7 @@ function AccordionItem({ item }: { item: FAQItem }) {
   );
 }
 
-export default function FAQ({ data }: { data?: FAQData | null }) {
+export default function FAQ({ data, sectionBg = "bg-white" }: { data?: FAQData | null; sectionBg?: string }) {
   const sectionTitle = data?.sectionTitle ?? "よくある質問";
   const sectionDescription =
     data?.sectionDescription ?? "ご予約前の不安や疑問を解消します";
@@ -98,7 +98,7 @@ export default function FAQ({ data }: { data?: FAQData | null }) {
     data?.items && data.items.length > 0 ? data.items : defaultFAQItems;
 
   return (
-    <section id="faq" className="bg-white py-20 md:py-24">
+    <section id="faq" className={`${sectionBg} py-20 md:py-24`}>
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="mb-12 text-center md:mb-14">

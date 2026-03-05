@@ -61,25 +61,29 @@ node scripts/seed.mjs
 ```
 src/
 ├── app/
-│   ├── (main)/        # サイト本体（Header / Footer あり）
-│   │   ├── layout.tsx # SEO メタデータ取得
-│   │   └── page.tsx   # 全セクションのデータ取得・描画
-│   ├── studio/        # Sanity Studio（/studio）
-│   └── layout.tsx     # ルートレイアウト（フォント・globals.css）
-├── components/        # 共通コンポーネント + セクション
+│   ├── (main)/              # サイト本体（Header / Footer あり）
+│   │   ├── layout.tsx       # SEO メタデータ取得
+│   │   ├── page.tsx         # トップページ
+│   │   └── chiropractic/    # 整体ページ（/chiropractic）
+│   │       └── page.tsx
+│   ├── studio/              # Sanity Studio（/studio）
+│   └── layout.tsx           # ルートレイアウト（フォント・globals.css）
+├── components/              # 共通コンポーネント + セクション
 │   ├── Header.tsx
 │   ├── Footer.tsx
 │   ├── FloatingButtons.tsx
 │   ├── FadeIn.tsx
-│   └── sections/      # Hero, Services, Concerns, Reasons, etc.
+│   └── sections/            # Hero, Services, Concerns, Reasons, SeitaiSymptoms, etc.
 └── sanity/
-    ├── client.ts      # Sanity クライアント・safeFetch ヘルパー
-    ├── env.ts         # 環境変数
-    ├── image.ts       # 画像URL生成
-    └── schemas/       # 全スキーマ定義
+    ├── client.ts            # Sanity クライアント・safeFetch ヘルパー
+    ├── env.ts               # 環境変数
+    ├── image.ts             # 画像URL生成
+    └── schemas/             # 全スキーマ定義
 ```
 
 ## ページ構成
+
+### トップページ（/）
 
 | セクション | 内容 |
 |---|---|
@@ -88,6 +92,21 @@ src/
 | Concerns | お悩み6項目 + 根本原因 |
 | Reasons | 選ばれる3つの理由 |
 | Testimonials | お客様の声 |
+| Profile | 代表プロフィール |
+| Pricing | 料金案内 |
+| FAQ | よくあるご質問 |
+| Access | 店舗情報・アクセス |
+| CTA | 最終CTA |
+
+### 整体ページ（/chiropractic）
+
+| セクション | 内容 |
+|---|---|
+| Hero | 整体専用ビジュアル + CTA |
+| Concerns | お悩みリスト形式 |
+| SeitaiSymptoms | 放置すると起こりやすい不調の例（6項目） |
+| RootCause | なぜ痛みが繰り返すのか |
+| Reasons | 選ばれる3つの理由 |
 | Profile | 代表プロフィール |
 | Pricing | 料金案内 |
 | FAQ | よくあるご質問 |

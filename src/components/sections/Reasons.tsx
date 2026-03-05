@@ -50,7 +50,7 @@ function ReasonVisual({
   imageAlt,
   align = "center",
 }: {
-  imageUrl: string;
+  imageUrl: string | null | undefined;
   imageAlt: string;
   align?: "start" | "center" | "end";
 }) {
@@ -64,17 +64,21 @@ function ReasonVisual({
           : "md:justify-self-center"
       } overflow-hidden rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.08)]`}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={imageUrl}
-        alt={imageAlt}
-        className="h-full w-full object-cover object-center"
-      />
+      {imageUrl ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={imageUrl}
+          alt={imageAlt}
+          className="h-full w-full object-cover object-center"
+        />
+      ) : (
+        <div className="h-full w-full bg-gray-200" />
+      )}
     </div>
   );
 }
 
-export default function Reasons({ data }: { data?: ReasonsData | null }) {
+export default function Reasons({ data, sectionBg = "bg-[#e8f3ec]" }: { data?: ReasonsData | null; sectionBg?: string }) {
   const sectionTitle =
     data?.sectionTitle ?? "VERDE FITが選ばれる3つの理由";
   const sectionDescription =
@@ -86,7 +90,7 @@ export default function Reasons({ data }: { data?: ReasonsData | null }) {
       : defaultReasons;
 
   return (
-    <section id="reasons" className="bg-[#e8f3ec] py-20 md:py-24">
+    <section id="reasons" className={`${sectionBg} py-20 md:py-24`}>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="mb-11 text-center md:mb-12">
@@ -102,7 +106,8 @@ export default function Reasons({ data }: { data?: ReasonsData | null }) {
         <div className="mx-auto max-w-[1080px] space-y-6 md:space-y-8">
           {reasons.map((reason, i) => {
             const reverse = i % 2 === 1;
-            const imgSrc = reason.imageUrl ?? `/reason-0${i + 1}.png`;
+            // null は明示的に「画像なし（プレースホルダー）」、undefined はデフォルト画像にフォールバック
+            const imgSrc = reason.imageUrl === undefined ? `/reason-0${i + 1}.png` : reason.imageUrl;
             const imgAlt = reason.imageAlt ?? reason.title ?? "理由画像";
 
             return (

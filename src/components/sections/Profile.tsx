@@ -6,45 +6,54 @@ type ProfileData = {
   role?: string | null;
   name?: string | null;
   imageUrl?: string | null;
-  beliefTitle?: string | null;
   beliefDescription?: string | null;
   highlight?: string | null;
   closingText?: string | null;
+  history?: string[] | null;
   credentials?: string[] | null;
 };
+
+const defaultHistory = [
+  "1995.10.16 横手市出身",
+  "平成26年3月 横手清陵高校卒業",
+  "平成29年3月 盛岡医療福祉専門学校 柔道整復師学科 卒業",
+  "秋田市の整骨院に10年間勤務",
+  "令和8年4月 VERDE FIT 開業",
+];
 
 const defaultCredentials = [
   "柔道整復師 国家資格取得",
   "NSCA-CPT（認定パーソナルトレーナー）",
-  "認定ボディメイクコーチ資格",
+  "COMPASS認定プロコーチ",
   "整体・トレーニング指導歴 10年",
   "延べ施術人数 5,000人以上",
 ];
 
-export default function Profile({ data }: { data?: ProfileData | null }) {
+export default function Profile({ data, sectionBg = "bg-[#e8f3ec]" }: { data?: ProfileData | null; sectionBg?: string }) {
   const sectionTitle = data?.sectionTitle ?? "代表プロフィール";
   const sectionDescription =
     data?.sectionDescription ?? "なりたい理想の自分へとあなたを導きます";
   const role = data?.role ?? "代表 / 施術者";
   const name = data?.name ?? "吉田 宗太郎";
   const imageUrl = data?.imageUrl ?? "/profile.png";
-  const beliefTitle = data?.beliefTitle ?? "「痛みのない人生を、すべての人に」";
   const beliefDescription =
     data?.beliefDescription ??
-    "これが、私がVERDE FITを立ち上げた理由です。柔道整復師として10年間、多くの方の痛みと向き合ってきました。その中で気づいたのは、痛みを取るだけでは不十分だということ。本当の健康とは、痛みがないだけでなく、理想の身体で、やりたいことを思い切りできる状態です。";
+    "子どもの頃から体型にコンプレックスがあり、自分に自信を持てずに過ごしてきました。学生時代は柔道に打ち込みましたが、怪我が多く思うように練習ができず、身体と向き合うことの難しさを何度も感じました。このままの自分ではいたくないという思いからボディメイクに取り組み、過去最高体重95kgから65kgまでのダイエットに成功しました。";
   const highlight =
     data?.highlight ??
-    "私自身、95kgから65kgへのダイエットに成功した経験があります。この経験が、お客様の気持ちに寄り添い、確実に結果を出すサポートの原動力となっています。";
+    "この経験から身体が変わると気持ちや行動も変わり、日常の見え方まで明るくなることを実感しました。";
   const closingText =
     data?.closingText ??
-    "整体で痛みを取り、トレーニングで動ける身体をつくり、コーチングで継続する習慣を身につける。この3つが揃って初めて、真の健康が手に入ります。横手市の健康パートナーとして、一人ひとりに真摯に向き合い、理想の未来への一歩をサポートします。";
+    "整体で体を整え、トレーニングで体を鍛え、コーチングで継続する習慣を身につける。この3つが揃って初めて、なりたい理想の自分と出会うことができます。私が生まれ育った横手市でお客様一人ひとりと真摯に向き合い理想の未来へと一緒に伴走していきます。";
+  const history =
+    data?.history && data.history.length > 0 ? data.history : defaultHistory;
   const credentials =
     data?.credentials && data.credentials.length > 0
       ? data.credentials
       : defaultCredentials;
 
   return (
-    <section id="profile" className="bg-[#e8f3ec] py-20 md:py-24">
+    <section id="profile" className={`${sectionBg} py-20 md:py-24`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="mb-12 text-center md:mb-14">
@@ -82,14 +91,11 @@ export default function Profile({ data }: { data?: ProfileData | null }) {
 
               <div className="mt-8">
                 <p className="text-xl font-bold text-green-700 md:text-2xl">想い</p>
-                <p className="mt-3 text-lg font-bold text-[#374151] md:text-xl">
-                  {beliefTitle}
-                </p>
 
-                <div className="mt-5 space-y-4 text-[15px] leading-8 text-gray-700 md:text-[16px] md:leading-9">
+                <div className="mt-4 space-y-4 text-[15px] leading-8 text-gray-700 md:text-[16px] md:leading-9">
                   <p>{beliefDescription}</p>
 
-                  <div className="rounded-lg border-l-4 border-green-700 bg-green-50 px-5 py-4 text-[14px] leading-7 font-medium text-green-900 md:text-[15px]">
+                  <div className="rounded-xl border-2 border-green-700 bg-white px-6 py-5 text-center text-[15px] font-bold leading-8 text-green-800 md:text-[16px]">
                     {highlight}
                   </div>
 
@@ -98,9 +104,16 @@ export default function Profile({ data }: { data?: ProfileData | null }) {
               </div>
 
               <div className="mt-8">
-                <h4 className="text-xl font-bold text-green-700 md:text-2xl">
-                  経歴・資格
-                </h4>
+                <h4 className="text-xl font-bold text-green-700 md:text-2xl">経歴</h4>
+                <ul className="mt-4 space-y-2 text-[15px] leading-8 text-gray-700 md:text-[16px]">
+                  {history.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-8">
+                <h4 className="text-xl font-bold text-green-700 md:text-2xl">保有資格</h4>
                 <ul className="mt-4 space-y-2.5">
                   {credentials.map((c, i) => (
                     <li

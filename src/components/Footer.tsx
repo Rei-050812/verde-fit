@@ -15,7 +15,7 @@ type FooterProps = {
 
 const footerLinks = [
   { href: "/", label: "TOP" },
-  { href: "#services", label: "整体" },
+  { href: "/chiropractic", label: "整体" },
   { href: "#personal", label: "パーソナルトレーニング" },
   { href: "#coaching", label: "コーチング" },
   { href: "#pricing", label: "料金" },

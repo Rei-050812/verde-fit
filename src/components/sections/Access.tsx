@@ -16,7 +16,7 @@ type AccessData = {
   mapEmbedUrl?: string | null;
 };
 
-export default function Access({ data }: { data?: AccessData | null }) {
+export default function Access({ data, sectionBg = "bg-[#e8f3ec]" }: { data?: AccessData | null; sectionBg?: string }) {
   const sectionTitle = data?.sectionTitle ?? "店舗情報・アクセス";
   const sectionDescription =
     data?.sectionDescription ?? "横手市に、2026年春、OPEN予定です";
@@ -36,7 +36,7 @@ export default function Access({ data }: { data?: AccessData | null }) {
     `https://maps.google.com/maps?q=${encodeURIComponent(address)}&output=embed&hl=ja`;
 
   return (
-    <section id="access" className="bg-[#e8f3ec] py-20 md:py-24">
+    <section id="access" className={`${sectionBg} py-20 md:py-24`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeIn>
           <div className="mb-12 text-center md:mb-14">
@@ -53,7 +53,7 @@ export default function Access({ data }: { data?: AccessData | null }) {
           <FadeIn>
             <div>
               <p className="text-sm font-semibold text-green-700 md:text-base">店舗名</p>
-              <h3 className="mt-2 font-serif text-[26px] font-bold leading-tight text-[#1f2937] md:text-[44px]">
+              <h3 className="mt-2 font-serif text-[26px] font-bold leading-tight text-[#1f2937] md:text-[36px] whitespace-nowrap">
                 {storeName}
               </h3>
 

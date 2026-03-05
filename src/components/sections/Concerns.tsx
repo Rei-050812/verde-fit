@@ -110,7 +110,7 @@ function ConcernIcon({ type }: { type: IconType }) {
   );
 }
 
-export default function Concerns({ data }: { data?: ConcernsData | null }) {
+export default function Concerns({ data, showRootCause = true, sectionBg = "bg-[#e8f3ec]", variant = "card", listImageUrl }: { data?: ConcernsData | null; showRootCause?: boolean; sectionBg?: string; variant?: "card" | "list"; listImageUrl?: string | null }) {
   const sectionTitle = data?.sectionTitle ?? "こんなお悩み、ありませんか？";
   const sectionDescription =
     data?.sectionDescription ??
@@ -126,52 +126,90 @@ export default function Concerns({ data }: { data?: ConcernsData | null }) {
     "多くの不調は年齢や体力の低下だけが原因ではありません。姿勢の癖や身体の使い方、生活習慣の積み重ねによって特定の部位に負担が集中することで起こります。VERDE FITでは、整体で身体を整え、トレーニングで動ける身体をつくり、コーチングで継続できる習慣を確立。この３つのアプローチで、根本からの改善を実現します。";
 
   return (
-    <section className="bg-[#e8f3ec] pt-20 md:pt-24">
+    <section className={`${sectionBg} pt-20 md:pt-24`}>
       <div className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8 md:pb-24">
         <FadeIn>
           <div className="mb-10 text-center md:mb-12">
             <h2 className="font-serif text-4xl font-bold text-[#1f2937] md:text-[52px]">
               {sectionTitle}
             </h2>
-            <p className="mx-auto mt-4 max-w-3xl text-sm font-medium text-gray-500 md:text-xl">
-              {sectionDescription}
-            </p>
+            {sectionDescription && (
+              <p className="mx-auto mt-4 max-w-3xl text-sm font-medium text-gray-500 md:text-xl">
+                {sectionDescription}
+              </p>
+            )}
           </div>
         </FadeIn>
 
-        <div className="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {concerns.map((concern, i) => (
-            <FadeIn key={concern._key ?? i} delay={i * 90}>
-              <article className="flex h-full min-h-[290px] flex-col rounded-2xl border border-gray-100 bg-white p-7 shadow-[0_6px_20px_rgba(0,0,0,0.03)]">
-                <span className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-green-100/75">
-                  <ConcernIcon type={iconOrder[i % iconOrder.length]} />
-                </span>
-                <h3 className="mb-3 whitespace-nowrap text-[18px] font-bold leading-tight text-[#1f2937] lg:text-[20px]">
-                  {concern.title}
-                </h3>
-                <p className="text-[16px] leading-8 text-gray-600">{concern.description}</p>
-              </article>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-
-      <div className="bg-white py-14 md:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <FadeIn delay={120}>
-            <div className="text-center">
-              <h3 className="font-serif text-3xl font-bold text-[#1f2937] md:text-[40px]">
-                {rootCauseTitle}
-              </h3>
-              <div className="mt-8 rounded-xl border-2 border-green-700 bg-white px-8 py-8 md:px-20 md:py-10">
-                <p className="text-[14px] leading-[2] text-gray-700 md:text-[15px]">
-                  {rootCauseText}
-                </p>
+        {variant === "list" ? (
+          <FadeIn>
+            <div className="grid w-full grid-cols-1 items-center gap-10 md:grid-cols-[400px_1fr] md:gap-16">
+              <div className="h-[260px] w-full overflow-hidden rounded-2xl md:h-[320px]">
+                {listImageUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={listImageUrl}
+                    alt="お悩みイメージ"
+                    className="h-full w-full object-cover object-top"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-[#e8f3ec]">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-20 w-20 text-green-500" aria-hidden="true">
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                      <path d="M7.5 12h2l1.5-3 2 6 1.5-3H17" />
+                    </svg>
+                  </div>
+                )}
               </div>
+              <ul className="space-y-4">
+                {concerns.map((concern, i) => (
+                  <li key={concern._key ?? i} className="flex items-start gap-3">
+                    <span className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-green-700" />
+                    <span className="text-[17px] font-medium leading-8 text-[#1f2937]">
+                      {concern.title}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </FadeIn>
-        </div>
+        ) : (
+          <div className="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {concerns.map((concern, i) => (
+              <FadeIn key={concern._key ?? i} delay={i * 90}>
+                <article className="flex h-full min-h-[290px] flex-col rounded-2xl border border-gray-100 bg-white p-7 shadow-[0_6px_20px_rgba(0,0,0,0.03)]">
+                  <span className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-green-100/75">
+                    <ConcernIcon type={iconOrder[i % iconOrder.length]} />
+                  </span>
+                  <h3 className="mb-3 whitespace-nowrap text-[18px] font-bold leading-tight text-[#1f2937] lg:text-[20px]">
+                    {concern.title}
+                  </h3>
+                  <p className="text-[16px] leading-8 text-gray-600">{concern.description}</p>
+                </article>
+              </FadeIn>
+            ))}
+          </div>
+        )}
       </div>
+
+      {showRootCause && (
+        <div className="bg-white py-14 md:py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <FadeIn delay={120}>
+              <div className="text-center">
+                <h3 className="font-serif text-3xl font-bold text-[#1f2937] md:text-[40px]">
+                  {rootCauseTitle}
+                </h3>
+                <div className="mt-8 rounded-xl border-2 border-green-700 bg-white px-8 py-8 md:px-20 md:py-10">
+                  <p className="text-[14px] leading-[2] text-gray-700 md:text-[15px]">
+                    {rootCauseText}
+                  </p>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

@@ -3,7 +3,7 @@
 import { useMenu } from "@/components/MenuProvider";
 
 const navLinks = [
-  { href: "#services", label: "整体" },
+  { href: "/chiropractic", label: "整体" },
   { href: "#personal", label: "パーソナル" },
   { href: "#coaching", label: "コーチング" },
   { href: "#pricing", label: "料金" },

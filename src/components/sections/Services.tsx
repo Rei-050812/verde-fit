@@ -5,6 +5,7 @@ type ServiceItem = {
   title?: string | null;
   description?: string | null;
   buttonText?: string | null;
+  href?: string | null;
   imageUrl?: string | null;
   imageAlt?: string | null;
 };
@@ -22,6 +23,7 @@ const defaultServices: ServiceItem[] = [
     description:
       "厚生労働省認可の国家資格保有者があなたにあった最適な施術を提供。肩こり・腰痛・姿勢の歪みなど、痛みの原因を徹底的に分析し根本改善を目指します。10年の実績で培った確かな技術で痛みのない日常を取り戻しましょう。横手市でプロフェッショナルな整体をあなたに。",
     buttonText: "整体の詳細を見る",
+    href: "/chiropractic",
     imageUrl: "/service-seitai.png",
     imageAlt: "整体施術のシーン",
   },
@@ -95,7 +97,7 @@ export default function Services({ data }: { data?: ServicesData | null }) {
                   </p>
 
                   <a
-                    href="#"
+                    href={service.href ?? "#"}
                     className="inline-flex h-12 items-center justify-center rounded-md border-2 px-6 text-sm font-semibold transition-colors border-green-700 text-green-700 hover:bg-green-50"
                   >
                     {service.buttonText ?? "詳細を見る"} →

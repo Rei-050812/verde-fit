@@ -19,7 +19,7 @@ export default function Hero({ data, phone }: { data?: HeroData | null; phone?: 
   const description =
     data?.description ??
     "その不調、年齢のせいにしていませんか？\n身体が変わらないのは努力不足ではありません。\n整体・パーソナルトレーニング・コーチングを融合したトータルサポートで\nいつまでも自分らしく生きられる身体へと導きます。";
-  const imageUrl = data?.imageUrl ?? "/hero.png";
+  const imageUrl = data?.imageUrl !== undefined ? data.imageUrl : "/hero.png";
   const imageAlt = data?.imageAlt ?? "ストレッチをする女性";
   const primaryButtonText = data?.primaryButtonText ?? "予約はこちら";
   const secondaryButtonText = data?.secondaryButtonText ?? "お電話でのご相談";
@@ -77,12 +77,16 @@ export default function Hero({ data, phone }: { data?: HeroData | null; phone?: 
             <div
               className="relative -mx-4 w-[calc(100%+2rem)] sm:-mx-6 sm:w-[calc(100%+3rem)] lg:mx-0 lg:w-full overflow-hidden aspect-[4/3] lg:aspect-square lg:rounded-full"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={imageUrl}
-                alt={imageAlt}
-                className="absolute inset-0 h-full w-full object-cover object-top"
-              />
+              {imageUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={imageUrl}
+                  alt={imageAlt}
+                  className="absolute inset-0 h-full w-full object-cover object-top"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-gray-200" />
+              )}
             </div>
           </FadeIn>
         </div>
