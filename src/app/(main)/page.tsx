@@ -244,7 +244,7 @@ export default async function Home() {
       <Profile data={profileData} />
       <Pricing data={pricingData} />
       <FAQ data={faqData} />
-      <Access data={accessData} />
+      <Access data={accessData ? { ...accessData, phone } : { phone }} />
       <CTA data={ctaData} phone={phone} />
     </>
   );
