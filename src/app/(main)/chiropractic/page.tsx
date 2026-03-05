@@ -221,7 +221,7 @@ export default async function SeitaiPage() {
 
   // Transform image refs → URLs
   const heroData = heroRaw
-    ? { ...heroRaw, imageUrl: imgUrl(heroRaw.image) }
+    ? { ...heroRaw, imageUrl: imgUrl(heroRaw.image) ?? "/chiropractic-hero.png" }
     : null;
 
   const concernsData = concernsRaw
