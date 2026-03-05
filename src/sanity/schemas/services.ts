@@ -37,6 +37,12 @@ export const servicesSchema = defineType({
               type: "string",
             }),
             defineField({
+              name: "href",
+              title: "リンク先URL",
+              type: "string",
+              description: "例: /chiropractic（空欄の場合はボタンが無効になります）",
+            }),
+            defineField({
               name: "image",
               title: "画像",
               type: "image",

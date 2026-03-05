@@ -30,6 +30,7 @@ type ServiceItem = {
   title?: string;
   description?: string;
   buttonText?: string;
+  href?: string;
   imageUrl?: string;
   imageAlt?: string;
 };
