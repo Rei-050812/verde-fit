@@ -7,7 +7,6 @@ import { safeFetch } from "@/sanity/client";
 import { urlForImage } from "@/sanity/image";
 
 type SiteSettingsSanity = {
-  phone?: string;
   instagramUrl?: string;
   facebookUrl?: string;
   lineUrl?: string;
@@ -18,6 +17,7 @@ type SiteSettingsSanity = {
 };
 
 type AccessPartialSanity = {
+  phone?: string;
   postalCode?: string;
   address?: string;
   hours?: string;
@@ -97,14 +97,14 @@ export default async function MainLayout({
 }) {
   const [settings, access] = await Promise.all([
     safeFetch<SiteSettingsSanity>(
-      `*[_type == "siteSettings"][0]{ phone, instagramUrl, facebookUrl, lineUrl, footerDescription, copyrightYear, logo{ asset{ _ref, _type } }, favicon{ asset{ _ref, _type } } }`
+      `*[_type == "siteSettings"][0]{ instagramUrl, facebookUrl, lineUrl, footerDescription, copyrightYear, logo{ asset{ _ref, _type } }, favicon{ asset{ _ref, _type } } }`
     ),
     safeFetch<AccessPartialSanity>(
-      `*[_type == "access"][0]{ postalCode, address, hours, lastEntry, closedDays }`
+      `*[_type == "access"][0]{ phone, postalCode, address, hours, lastEntry, closedDays }`
     ),
   ]);
 
-  const phone = settings?.phone ?? undefined;
+  const phone = access?.phone ?? undefined;
   const instagramUrl = settings?.instagramUrl ?? undefined;
   const facebookUrl = settings?.facebookUrl ?? undefined;
   const lineUrl = settings?.lineUrl ?? undefined;

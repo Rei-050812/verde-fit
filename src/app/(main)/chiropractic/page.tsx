@@ -197,7 +197,6 @@ export default async function SeitaiPage() {
     faqData,
     accessData,
     ctaData,
-    siteSettings,
   ] = await Promise.all([
     safeFetch<HeroRaw>(
       `*[_type == "chiropracticHero"][0]{ ..., image{ asset{ _ref, _type } } }`
@@ -216,7 +215,6 @@ export default async function SeitaiPage() {
     safeFetch<FAQData>(`*[_type == "chiropracticFaq"][0]`),
     safeFetch<AccessData>(`*[_type == "access"][0]`),
     safeFetch<CTAData>(`*[_type == "chiropracticCta"][0]`),
-    safeFetch<{ phone?: string }>(`*[_type == "siteSettings"][0]{ phone }`),
   ]);
 
   // Transform image refs → URLs
@@ -245,8 +243,7 @@ export default async function SeitaiPage() {
     ? { ...profileRaw, imageUrl: imgUrl(profileRaw.image) }
     : null;
 
-  const phone = siteSettings?.phone ?? accessData?.phone ?? undefined;
-  const mergedAccessData = accessData ? { ...accessData, phone } : { phone };
+  const phone = accessData?.phone ?? undefined;
 
   return (
     <>
@@ -264,7 +261,7 @@ export default async function SeitaiPage() {
       <Profile data={profileData} sectionBg="bg-white" />
       <Pricing data={pricingData} sectionBg="bg-[#e8f3ec]" />
       <FAQ data={faqData} sectionBg="bg-[#e8f3ec]" />
-      <Access data={mergedAccessData} sectionBg="bg-white" />
+      <Access data={accessData} sectionBg="bg-white" />
       <CTA data={ctaData} phone={phone} />
     </>
   );

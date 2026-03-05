@@ -6,12 +6,6 @@ export const siteSettingsSchema = defineType({
   type: "document",
   fields: [
     defineField({ name: "siteTitle", title: "サイトタイトル", type: "string" }),
-    defineField({
-      name: "phone",
-      title: "電話番号",
-      type: "string",
-      description: "例: 018-000-0000",
-    }),
     defineField({ name: "instagramUrl", title: "Instagram URL", type: "url" }),
     defineField({ name: "facebookUrl", title: "Facebook URL", type: "url" }),
     defineField({ name: "lineUrl", title: "LINE URL", type: "url" }),
