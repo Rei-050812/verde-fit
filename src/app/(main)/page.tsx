@@ -73,6 +73,7 @@ type VoiceItem = {
 type TestimonialsSanity = {
   sectionTitle?: string;
   sectionDescription?: string;
+  listHref?: string;
   voiceList?: VoiceItem[];
 };
 
@@ -103,6 +104,7 @@ type PricingSanity = {
   trialBenefits?: string[];
   pricingColumns?: PricingColumn[];
   pricingNote?: string;
+  pricingDetailsHref?: string;
   cancelPolicyIntro?: string;
   cancelPolicySections?: CancelPolicySection[];
   cancelPolicyClosing?: string;
@@ -135,6 +137,7 @@ type CTASanity = {
   heading?: string;
   description?: string;
   primaryButtonText?: string;
+  primaryButtonHref?: string;
   secondaryButtonText?: string;
 };
 

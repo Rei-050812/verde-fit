@@ -4,6 +4,7 @@ type CTAData = {
   heading?: string | null;
   description?: string | null;
   primaryButtonText?: string | null;
+  primaryButtonHref?: string | null;
   secondaryButtonText?: string | null;
 };
 
@@ -13,6 +14,7 @@ export default function CTA({ data, phone }: { data?: CTAData | null; phone?: st
     data?.description ??
     "横手市に誕生する、本格トータルケアサロン VERDE FIT。\n整体・パーソナルトレーニング・コーチングで、あなたの理想の身体と健康習慣を実現します。\nまずは初回体験で、その違いを実感してください。";
   const primaryButtonText = data?.primaryButtonText ?? "予約はこちら";
+  const primaryButtonHref = data?.primaryButtonHref ?? "#";
   const secondaryButtonText = data?.secondaryButtonText ?? "お電話でのご相談";
 
   return (
@@ -30,7 +32,7 @@ export default function CTA({ data, phone }: { data?: CTAData | null; phone?: st
 
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
               <a
-                href="#"
+                href={primaryButtonHref}
                 className="inline-flex h-14 min-w-[240px] items-center justify-center rounded-lg bg-green-700 px-10 text-base font-semibold text-white transition-colors hover:bg-green-800"
               >
                 {primaryButtonText}

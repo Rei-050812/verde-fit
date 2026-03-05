@@ -22,6 +22,13 @@ export const ctaSchema = defineType({
       type: "string",
     }),
     defineField({
+      name: "primaryButtonHref",
+      title: "予約ボタンリンク先",
+      type: "url",
+      description: "予約システムのURL（例: https://example.com/booking）",
+      validation: (Rule) => Rule.uri({ allowRelative: true }),
+    }),
+    defineField({
       name: "secondaryButtonText",
       title: "電話ボタンテキスト",
       type: "string",

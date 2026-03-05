@@ -96,6 +96,13 @@ export const pricingSchema = defineType({
       ],
     }),
     defineField({
+      name: "pricingDetailsHref",
+      title: "料金詳細リンク先",
+      type: "url",
+      description: "「料金詳細はこちら」ボタンのリンク先。空欄の場合はボタン非表示。",
+      validation: (Rule) => Rule.uri({ allowRelative: true }),
+    }),
+    defineField({
       name: "pricingNote",
       title: "料金表の注記",
       type: "string",

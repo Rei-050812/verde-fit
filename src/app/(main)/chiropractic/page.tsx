@@ -169,6 +169,7 @@ export default async function SeitaiPage() {
     heading?: string;
     description?: string;
     primaryButtonText?: string;
+    primaryButtonHref?: string;
     secondaryButtonText?: string;
   };
 
