@@ -116,19 +116,17 @@ export default function Testimonials({ data }: { data?: TestimonialsData | null 
           ))}
         </div>
 
-        {data?.listHref && (
-          <FadeIn delay={100}>
-            <div className="mt-10 text-center">
-              <a
-                href={data.listHref}
-                className="inline-flex items-center gap-2 rounded-lg bg-green-700 px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-800"
-              >
-                お客様の声一覧へ
-                <span aria-hidden="true">→</span>
-              </a>
-            </div>
-          </FadeIn>
-        )}
+        <FadeIn delay={100}>
+          <div className="mt-10 text-center">
+            <a
+              href={data?.listHref ?? "#"}
+              className="inline-flex items-center gap-2 rounded-lg bg-green-700 px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-800"
+            >
+              お客様の声一覧へ
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
