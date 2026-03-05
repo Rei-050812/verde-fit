@@ -700,17 +700,34 @@ const documents = [
 async function seed() {
   console.log(`\n🌱 Sanity シードを開始します（プロジェクト: ${projectId}）\n`);
 
+  // 既存ドキュメントのIDを取得
+  const existingIds = await client.fetch(
+    `*[_id in $ids]._id`,
+    { ids: documents.map((d) => d._id) }
+  );
+  const existingSet = new Set(existingIds);
+
   const transaction = client.transaction();
+  let created = 0;
+  let skipped = 0;
 
   for (const doc of documents) {
-    // createOrReplace: 既存ドキュメントがあれば上書き、なければ作成
-    transaction.createOrReplace(doc);
-    console.log(`  ✅ ${doc._type} (${doc._id})`);
+    if (existingSet.has(doc._id)) {
+      console.log(`  ⏭️  スキップ（既存）: ${doc._type} (${doc._id})`);
+      skipped++;
+    } else {
+      // createIfNotExists: 存在しない場合のみ作成（既存データ・画像を上書きしない）
+      transaction.createIfNotExists(doc);
+      console.log(`  ✅ 作成: ${doc._type} (${doc._id})`);
+      created++;
+    }
   }
 
-  await transaction.commit();
+  if (created > 0) {
+    await transaction.commit();
+  }
 
-  console.log(`\n✨ 完了！${documents.length}件のドキュメントを登録しました。`);
+  console.log(`\n✨ 完了！ 作成: ${created}件 / スキップ: ${skipped}件`);
   console.log("   Studio で確認: http://localhost:3000/studio\n");
 }
 
