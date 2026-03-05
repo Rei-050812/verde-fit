@@ -29,7 +29,6 @@ type PricingData = {
   trialBenefits?: string[] | null;
   pricingColumns?: PricingColumn[] | null;
   pricingNote?: string | null;
-  pricingDetailsHref?: string | null;
   cancelPolicyIntro?: string | null;
   cancelPolicySections?: CancelPolicySection[] | null;
   cancelPolicyClosing?: string | null;
@@ -225,17 +224,15 @@ export default function Pricing({ data, sectionBg = "bg-white" }: { data?: Prici
 
             <p className="mt-6 text-center text-xs text-gray-500">{pricingNote}</p>
 
-            {data?.pricingDetailsHref && (
-              <div className="mt-6 text-center">
-                <a
-                  href={data.pricingDetailsHref}
-                  className="inline-flex items-center gap-1.5 rounded-md bg-green-700 px-7 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-800"
-                >
-                  料金詳細はこちら
-                  <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            )}
+            <div className="mt-6 text-center">
+              <a
+                href="/chiropractic#pricing"
+                className="inline-flex items-center gap-1.5 rounded-md bg-green-700 px-7 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-800"
+              >
+                料金詳細はこちら
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
           </div>
         </FadeIn>
 

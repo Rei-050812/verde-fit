@@ -104,7 +104,6 @@ type PricingSanity = {
   trialBenefits?: string[];
   pricingColumns?: PricingColumn[];
   pricingNote?: string;
-  pricingDetailsHref?: string;
   cancelPolicyIntro?: string;
   cancelPolicySections?: CancelPolicySection[];
   cancelPolicyClosing?: string;
