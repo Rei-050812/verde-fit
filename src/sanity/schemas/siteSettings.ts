@@ -6,6 +6,13 @@ export const siteSettingsSchema = defineType({
   type: "document",
   fields: [
     defineField({ name: "siteTitle", title: "サイトタイトル", type: "string" }),
+    defineField({
+      name: "bookingUrl",
+      title: "予約ボタンURL",
+      type: "url",
+      description: "予約システムのURL（例: https://example.com/booking）",
+      validation: (Rule) => Rule.uri({ allowRelative: true }),
+    }),
     defineField({ name: "instagramUrl", title: "Instagram URL", type: "url" }),
     defineField({ name: "facebookUrl", title: "Facebook URL", type: "url" }),
     defineField({ name: "lineUrl", title: "LINE URL", type: "url" }),

@@ -11,7 +11,6 @@ type VoiceItem = {
 type TestimonialsData = {
   sectionTitle?: string | null;
   sectionDescription?: string | null;
-  listHref?: string | null;
   voiceList?: VoiceItem[] | null;
 };
 
@@ -116,17 +115,12 @@ export default function Testimonials({ data }: { data?: TestimonialsData | null 
           ))}
         </div>
 
-        <FadeIn delay={100}>
-          <div className="mt-10 text-center">
-            <a
-              href={data?.listHref ?? "#"}
-              className="inline-flex items-center gap-2 rounded-lg bg-green-700 px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-800"
-            >
-              お客様の声一覧へ
-              <span aria-hidden="true">→</span>
-            </a>
-          </div>
-        </FadeIn>
+        <div className="mt-10 text-center">
+          <span className="inline-flex items-center gap-2 rounded-lg px-8 py-3 text-sm font-semibold border-2 border-gray-300 text-gray-400 cursor-default">
+            お客様の声一覧へ
+            <span aria-hidden="true">→</span>
+          </span>
+        </div>
       </div>
     </section>
   );

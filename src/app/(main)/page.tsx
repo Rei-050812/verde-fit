@@ -30,7 +30,6 @@ type ServiceItem = {
   title?: string;
   description?: string;
   buttonText?: string;
-  href?: string;
   imageUrl?: string;
   imageAlt?: string;
 };
@@ -73,7 +72,6 @@ type VoiceItem = {
 type TestimonialsSanity = {
   sectionTitle?: string;
   sectionDescription?: string;
-  listHref?: string;
   voiceList?: VoiceItem[];
 };
 
@@ -136,8 +134,11 @@ type CTASanity = {
   heading?: string;
   description?: string;
   primaryButtonText?: string;
-  primaryButtonHref?: string;
   secondaryButtonText?: string;
+};
+
+type SiteSettingsSanity = {
+  bookingUrl?: string;
 };
 
 // ─── Raw Sanity types (with image objects) ────────────────────────
@@ -171,6 +172,7 @@ export default async function Home() {
     faqData,
     accessData,
     ctaData,
+    siteSettingsData,
   ] = await Promise.all([
     safeFetch<HeroRaw>(
       `*[_type == "hero"][0]{ ..., image{ asset{ _ref, _type } } }`
@@ -192,6 +194,7 @@ export default async function Home() {
     safeFetch<FAQSanity>(`*[_type == "faqSection"][0]`),
     safeFetch<AccessSanity>(`*[_type == "access"][0]`),
     safeFetch<CTASanity>(`*[_type == "cta"][0]`),
+    safeFetch<SiteSettingsSanity>(`*[_type == "siteSettings"][0]{ bookingUrl }`),
   ]);
 
   // Transform: resolve image URLs
@@ -246,7 +249,7 @@ export default async function Home() {
       <Pricing data={pricingData} />
       <FAQ data={faqData} />
       <Access data={accessData} />
-      <CTA data={ctaData} phone={phone} />
+      <CTA data={ctaData} phone={phone} bookingUrl={siteSettingsData?.bookingUrl} />
     </>
   );
 }

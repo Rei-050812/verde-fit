@@ -16,13 +16,6 @@ export const testimonialsSchema = defineType({
       type: "string",
     }),
     defineField({
-      name: "listHref",
-      title: "一覧ページURL",
-      type: "url",
-      description: "「お客様の声一覧へ」ボタンのリンク先。空欄の場合はボタン非表示。",
-      validation: (Rule) => Rule.uri({ allowRelative: true }),
-    }),
-    defineField({
       name: "voiceList",
       title: "お客様の声一覧",
       type: "array",

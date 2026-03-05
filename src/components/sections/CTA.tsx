@@ -4,17 +4,16 @@ type CTAData = {
   heading?: string | null;
   description?: string | null;
   primaryButtonText?: string | null;
-  primaryButtonHref?: string | null;
   secondaryButtonText?: string | null;
 };
 
-export default function CTA({ data, phone }: { data?: CTAData | null; phone?: string }) {
+export default function CTA({ data, phone, bookingUrl }: { data?: CTAData | null; phone?: string; bookingUrl?: string }) {
   const heading = data?.heading ?? "身体を変える一歩を、今日から。";
   const description =
     data?.description ??
     "横手市に誕生する、本格トータルケアサロン VERDE FIT。\n整体・パーソナルトレーニング・コーチングで、あなたの理想の身体と健康習慣を実現します。\nまずは初回体験で、その違いを実感してください。";
   const primaryButtonText = data?.primaryButtonText ?? "予約はこちら";
-  const primaryButtonHref = data?.primaryButtonHref ?? "#";
+  const primaryButtonHref = bookingUrl ?? "#";
   const secondaryButtonText = data?.secondaryButtonText ?? "お電話でのご相談";
 
   return (

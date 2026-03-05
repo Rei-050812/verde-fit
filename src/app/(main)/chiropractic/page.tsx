@@ -169,7 +169,6 @@ export default async function SeitaiPage() {
     heading?: string;
     description?: string;
     primaryButtonText?: string;
-    primaryButtonHref?: string;
     secondaryButtonText?: string;
   };
 
@@ -199,6 +198,7 @@ export default async function SeitaiPage() {
     faqData,
     accessData,
     ctaData,
+    siteSettingsData,
   ] = await Promise.all([
     safeFetch<HeroRaw>(
       `*[_type == "chiropracticHero"][0]{ ..., image{ asset{ _ref, _type } } }`
@@ -219,6 +219,7 @@ export default async function SeitaiPage() {
     safeFetch<FAQData>(`*[_type == "chiropracticFaq"][0]`),
     safeFetch<AccessData>(`*[_type == "access"][0]`),
     safeFetch<CTAData>(`*[_type == "chiropracticCta"][0]`),
+    safeFetch<{ bookingUrl?: string }>(`*[_type == "siteSettings"][0]{ bookingUrl }`),
   ]);
 
   // Transform image refs → URLs
@@ -276,7 +277,7 @@ export default async function SeitaiPage() {
       <Pricing data={pricingData} sectionBg="bg-[#e8f3ec]" />
       <FAQ data={faqData} sectionBg="bg-[#e8f3ec]" />
       <Access data={accessData} sectionBg="bg-white" />
-      <CTA data={ctaData} phone={phone} />
+      <CTA data={ctaData} phone={phone} bookingUrl={siteSettingsData?.bookingUrl} />
     </>
   );
 }
