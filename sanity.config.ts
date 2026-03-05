@@ -14,8 +14,19 @@ const topPageSections = [
   { name: "profile", title: "代表プロフィール" },
   { name: "pricing", title: "料金" },
   { name: "faqSection", title: "よくある質問" },
-  { name: "access", title: "店舗情報" },
   { name: "cta", title: "CTA" },
+];
+
+const chiropracticSections = [
+  { name: "chiropracticSeo", title: "SEO設定" },
+  { name: "chiropracticHero", title: "ヒーロー" },
+  { name: "chiropracticConcerns", title: "お悩み" },
+  { name: "chiropracticDisorders", title: "不調の例" },
+  { name: "chiropracticReasons", title: "選ばれる理由" },
+  { name: "chiropracticProfile", title: "代表プロフィール" },
+  { name: "chiropracticPricing", title: "料金案内" },
+  { name: "chiropracticFaq", title: "よくある質問" },
+  { name: "chiropracticCta", title: "CTA" },
 ];
 
 function singleton(S: StructureBuilder, name: string, title: string) {
@@ -41,6 +52,7 @@ export default defineConfig({
           .title("コンテンツ管理")
           .items([
             singleton(S, "siteSettings", "サイト設定"),
+            singleton(S, "access", "店舗情報・アクセス"),
             S.divider(),
             S.listItem()
               .title("トップページ")
@@ -51,6 +63,19 @@ export default defineConfig({
                   .title("トップページ")
                   .items(
                     topPageSections.map(({ name, title }) =>
+                      singleton(S, name, title)
+                    )
+                  )
+              ),
+            S.listItem()
+              .title("整体ページ")
+              .id("chiropractic")
+              .child(
+                S.list()
+                  .id("chiropractic-list")
+                  .title("整体ページ")
+                  .items(
+                    chiropracticSections.map(({ name, title }) =>
                       singleton(S, name, title)
                     )
                   )

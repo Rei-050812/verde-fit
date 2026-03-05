@@ -10,6 +10,15 @@ import { pricingSchema } from "./pricing";
 import { faqSchema } from "./faq";
 import { accessSchema } from "./access";
 import { ctaSchema } from "./cta";
+import { chiropracticSeoSchema } from "./chiropracticSeo";
+import { chiropracticHeroSchema } from "./chiropracticHero";
+import { chiropracticConcernsSchema } from "./chiropracticConcerns";
+import { chiropracticDisordersSchema } from "./chiropracticDisorders";
+import { chiropracticReasonsSchema } from "./chiropracticReasons";
+import { chiropracticProfileSchema } from "./chiropracticProfile";
+import { chiropracticPricingSchema } from "./chiropracticPricing";
+import { chiropracticFaqSchema } from "./chiropracticFaq";
+import { chiropracticCtaSchema } from "./chiropracticCta";
 
 export const schemaTypes = [
   siteSettingsSchema,
@@ -24,4 +33,13 @@ export const schemaTypes = [
   faqSchema,
   accessSchema,
   ctaSchema,
+  chiropracticSeoSchema,
+  chiropracticHeroSchema,
+  chiropracticConcernsSchema,
+  chiropracticDisordersSchema,
+  chiropracticReasonsSchema,
+  chiropracticProfileSchema,
+  chiropracticPricingSchema,
+  chiropracticFaqSchema,
+  chiropracticCtaSchema,
 ];
